@@ -22,7 +22,7 @@
             android:screenOrientation="portrait">
 
         </activity>
-
+        
         <activity
             android:name=".tictactoe.MainActivity"
             android:label="@string/app_name">
