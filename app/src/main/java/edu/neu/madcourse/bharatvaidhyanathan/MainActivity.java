@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        //Setting the app title
+        setTitle("Bharat Vaidhyanathan");
+
         // Here, thisActivity is the current activity
 
 

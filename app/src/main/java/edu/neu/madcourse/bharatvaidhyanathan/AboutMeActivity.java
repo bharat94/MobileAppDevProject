@@ -18,6 +18,8 @@ public class AboutMeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_me);
+        //Setting the app title
+        setTitle("Bharat Vaidhyanathan");
 
         if (ContextCompat.checkSelfPermission(AboutMeActivity.this,
                 Manifest.permission.READ_PHONE_STATE)
