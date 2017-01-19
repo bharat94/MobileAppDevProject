@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.AboutMeActivity;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.tictactoe.MainActivity.class);
+                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.MainActivity.class);
                 startActivity(i);
             }
         });

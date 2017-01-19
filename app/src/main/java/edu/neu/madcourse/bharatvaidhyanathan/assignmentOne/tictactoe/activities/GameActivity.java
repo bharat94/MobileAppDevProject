@@ -6,7 +6,7 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
 ***/
-package edu.neu.madcourse.bharatvaidhyanathan.tictactoe;
+package edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.fragments.GameFragment;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.Tile;
 
 public class GameActivity extends Activity {
    public static final String KEY_RESTORE = "key_restore";

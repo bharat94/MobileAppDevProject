@@ -6,7 +6,7 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
 ***/
-package edu.neu.madcourse.bharatvaidhyanathan.tictactoe;
+package edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.fragments.GameFragment;
 
 public class Tile {
 

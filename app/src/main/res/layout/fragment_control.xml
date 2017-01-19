@@ -13,7 +13,7 @@
    android:layout_height="wrap_content"
    android:orientation="horizontal"
    android:padding="@dimen/control_padding"
-   tools:context=".tictactoe.GameActivity">
+   tools:context=".assignmentOne.tictactoe.activities.GameActivity">
 
    <Button
       android:id="@+id/button_restart"
