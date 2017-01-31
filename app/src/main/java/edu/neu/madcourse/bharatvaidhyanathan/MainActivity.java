@@ -1,16 +1,23 @@
 package edu.neu.madcourse.bharatvaidhyanathan;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.AboutMeActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.DictObj;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private ProgressDialog progress;
+    private Intent dictionaryIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +66,14 @@ public class MainActivity extends AppCompatActivity {
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.TestDictionaryActivity.class);
-                startActivity(i);
+                //initialize the dictionary intent
+                dictionaryIntent = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.TestDictionaryActivity.class);
+                //setup and start the progress dialog
+                progress = ProgressDialog.show(MainActivity.this, "Loading", "Loading the Dictionary...", true, false);
+                SearchThread searchThread = new SearchThread(4000);
+                searchThread.start();
+
+
             }
         });
 
@@ -74,4 +87,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+    private class SearchThread extends Thread {
+
+        private int time;
+
+        public SearchThread(int time) {
+            this.time = time;
+        }
+
+        @Override
+        public void run() {
+            DictObj.getInstance();
+            //Thread.sleep(time);
+            handler.sendEmptyMessage(0);
+        }
+
+        private Handler handler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                //displaySearchResults(search);
+                startActivity(dictionaryIntent);
+                progress.dismiss();
+            }
+        };
+    }
+
 }
