@@ -14,10 +14,12 @@ import edu.neu.madcourse.bharatvaidhyanathan.MainActivity;
 /**
  * Created by vaidhyanathannarayanan on 31/01/17.
  */
+
 public class DictObj{
     private static Context context = null;
     private static DictObj ourInstance;
     private static boolean doneParsing = false;
+    private static Dictionary d;
 
     public static DictObj getInstance() {
         if(ourInstance == null || !doneParsing){
@@ -30,27 +32,23 @@ public class DictObj{
 
         context = App.getContext();
 
-        if(context == null)
-        System.out.println("Context is null");
+         d = new Dictionary();
 
         //Load word list
         InputStream ins = context.getResources().openRawResource(
                 context.getResources().getIdentifier("wordlist",
                         "raw", context.getPackageName()));
 
-        if(ins == null) System.out.println("ins is null");
-
         BufferedReader br = new BufferedReader(new InputStreamReader(ins));
 
-        if(br == null) System.out.println("BR is null");
 
         String strLine;
 
         //Read File Line By Line
         try {
             while ((strLine = br.readLine()) != null)   {
-                // Print the content on the console
-                System.out.println (strLine);
+                //System.out.println (strLine);
+                d.insert(strLine);
             }
             //Close the input stream
             br.close();
@@ -58,14 +56,13 @@ public class DictObj{
             e.printStackTrace();
         }
 
-
-
         //Make the tree
         // set doneParsing to true
+        doneParsing = true;
     }
 
     public static boolean searchTree(String s){
-        return false;
+        return (!s.isEmpty() && d.search(s));
     }
 
 

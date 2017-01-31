@@ -1,5 +1,7 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentThree;
 
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class TestDictionaryActivity extends AppCompatActivity {
     private ArrayList<String> matchesStringArray;
     private ArrayAdapter<String> arrayAdapter;
     private ListView listView;
+    private final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +53,13 @@ public class TestDictionaryActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                matchesStringArray.add(s.toString());
-                arrayAdapter.notifyDataSetChanged();
-                System.out.println(s);
+
+                if(DictObj.getInstance().searchTree(s.toString())) {
+                    tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+                    matchesStringArray.add(s.toString());
+                    arrayAdapter.notifyDataSetChanged();
+                    System.out.println("#"+s+"#");
+                }
             }
 
             @Override
