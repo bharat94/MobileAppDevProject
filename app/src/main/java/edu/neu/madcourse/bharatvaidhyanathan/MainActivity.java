@@ -54,8 +54,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Dictionary Button
         final Button b4 = (Button) findViewById(R.id.button4);
         b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.TestDictionaryActivity.class);
+                startActivity(i);
+            }
+        });
+
+        final Button bq = (Button) findViewById(R.id.buttonQuit);
+        bq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.this.finish();

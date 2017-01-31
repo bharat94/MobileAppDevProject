@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  ! Excerpted from "Hello, Android",
  ! published by The Pragmatic Bookshelf.
  ! Copyrights apply to this code. It may not be used to create training material, 
@@ -29,4 +28,5 @@ A tie happens when there are no further moves.
 In the case of a tie in a small board, that will count as a win for
 both sides in the larger game.
 </string>
+    <string name="title_activity_test_dictionary">TestDictionaryActivity</string>
 </resources>
