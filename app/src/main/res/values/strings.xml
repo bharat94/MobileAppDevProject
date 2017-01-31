@@ -19,6 +19,7 @@
     <string name="about_title">About Ultimate Tic Tac Toe</string>
     <string name="about_label">About</string>
     <string name="ok_label">OK</string>
+    <string name="search_hint">Enter Search Here</string>
     <string name="about_text">\
 This game is played just like
 regular Tic Tac Toe with one difference: to win a tile

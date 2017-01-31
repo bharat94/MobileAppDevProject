@@ -29,7 +29,8 @@
         <activity
             android:name=".assignmentThree.TestDictionaryActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_test_dictionary"></activity>
+            android:label="@string/title_activity_test_dictionary"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
