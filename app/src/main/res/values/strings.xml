@@ -20,14 +20,23 @@
     <string name="about_label">About</string>
     <string name="ok_label">OK</string>
     <string name="search_hint">Enter Search Here</string>
+
+    <string name="ack_text">\
+    Github user : prettymuchbryce for provinding an implementation of the trie
+        dictionary data structure in java : prettymuchbryce:dictionary.java\n\
+    \n\
+    StackOverflow for helping me solve a problem that I was facing when accessing context
+        from a static perspective.
+    </string>
+
     <string name="about_text">\
-This game is played just like
-regular Tic Tac Toe with one difference: to win a tile
-you have to win a smaller game of Tic Tac Toe inside that tile.\n\
-\n\
-A tie happens when there are no further moves.
-In the case of a tie in a small board, that will count as a win for
-both sides in the larger game.
-</string>
+    This game is played just like
+    regular Tic Tac Toe with one difference: to win a tile
+    you have to win a smaller game of Tic Tac Toe inside that tile.\n\
+    \n\
+    A tie happens when there are no further moves.
+    In the case of a tie in a small board, that will count as a win for
+    both sides in the larger game.
+    </string>
     <string name="title_activity_test_dictionary">TestDictionaryActivity</string>
 </resources>

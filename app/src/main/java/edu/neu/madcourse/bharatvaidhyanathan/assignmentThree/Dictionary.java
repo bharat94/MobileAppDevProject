@@ -1,5 +1,6 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentThree;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,24 +29,31 @@ public class Dictionary {
             roots.put(string.charAt(0), new Node());
         }
 
-        insertWord(string.substring(1),roots.get(string.charAt(0)));
+        ArrayList<Character> ch_arr = new ArrayList<Character>();
+
+        for(int i=1; i<string.length(); i++){
+            ch_arr.add(string.charAt(i));
+        }
+
+        insertWord(ch_arr,roots.get(string.charAt(0)));
     }
 
     //Recursive method that inserts a new word into the trie tree.
-    private void insertWord(String string, Node node) {
+    private void insertWord(ArrayList<Character> charr, Node node) {
         final Node nextChild;
-        if (node.children.containsKey(string.charAt(0))) {
-            nextChild = node.children.get(string.charAt(0));
+        char ch = charr.remove(0);
+        if (node.children.containsKey(ch)) {
+            nextChild = node.children.get(ch);
         } else {
             nextChild = new Node();
-            node.children.put(string.charAt(0), nextChild);
+            node.children.put(ch, nextChild);
         }
 
-        if (string.length() == 1) {
+        if (charr.isEmpty()) {
             nextChild.endOfWord = true;
             return;
         } else {
-            insertWord(string.substring(1),nextChild);
+            insertWord(charr,nextChild);
         }
     }
 
@@ -68,9 +76,7 @@ public class Dictionary {
     }
 }
 
-
 class Node {
-    public Node parent;
     public Boolean endOfWord = false; //Does this Node mark the end of a particular word?
     public HashMap<Character,Node> children = new HashMap<Character,Node>();
 }
