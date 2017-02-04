@@ -1,5 +1,6 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentThree;
 
+import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
@@ -14,6 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 import edu.neu.madcourse.bharatvaidhyanathan.MainActivity;
@@ -26,11 +32,16 @@ public class TestDictionaryActivity extends AppCompatActivity {
     private ArrayAdapter<String> arrayAdapter;
     private ListView listView;
     private final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+    AssetManager am;
+    private ArrayList<String> wordlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_dictionary);
+
+        //getting the assets
+        am = this.getAssets();
 
         //creating the alert dialog
 
@@ -70,13 +81,25 @@ public class TestDictionaryActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(before!=count && DictObj.getInstance().searchTree(s.toString())) {
-                    tg.startTone(ToneGenerator.TONE_PROP_BEEP);
-                    matchesStringArray.add(s.toString());
-                    arrayAdapter.notifyDataSetChanged();
-                    System.out.println("#"+s+"#");
-                    System.out.println("start : " +start + ", before : "+before+", count : "+count);
+//                if(before!=count && DictObj.getInstance().searchTree(s.toString())) {
+//                    tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+//                    matchesStringArray.add(s.toString());
+//                    arrayAdapter.notifyDataSetChanged();
+//                    System.out.println("#"+s+"#");
+//                    System.out.println("start : " +start + ", before : "+before+", count : "+count);
+//                }
+
+
+                if(before!=count && search(s.toString())){
+                    String str = s.toString();
+                    if(!matchesStringArray.contains(str)) {
+                        tg.startTone(ToneGenerator.TONE_PROP_BEEP);
+                        matchesStringArray.add(str);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+
                 }
+
             }
 
             @Override
@@ -115,5 +138,32 @@ public class TestDictionaryActivity extends AppCompatActivity {
         });
 
     }
+
+
+    public boolean search (String str){
+
+        if(str.length() == 3) {
+            try {
+                InputStream is = am.open("words/"+str+".txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                wordlist = new ArrayList<>();
+
+                String s;
+                while((s = br.readLine())!=null){
+                    wordlist.add(s);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(str.length() >= 3){
+            return wordlist.contains(str);
+        }
+
+        return false;
+    }
+
 
 }

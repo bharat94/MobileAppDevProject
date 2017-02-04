@@ -29,19 +29,13 @@ public class Dictionary {
             roots.put(string.charAt(0), new Node());
         }
 
-        ArrayList<Character> ch_arr = new ArrayList<Character>();
-
-        for(int i=1; i<string.length(); i++){
-            ch_arr.add(string.charAt(i));
-        }
-
-        insertWord(ch_arr,roots.get(string.charAt(0)));
+        insertWord(string.substring(1),roots.get(string.charAt(0)));
     }
 
     //Recursive method that inserts a new word into the trie tree.
-    private void insertWord(ArrayList<Character> charr, Node node) {
+    private void insertWord(String string, Node node) {
         final Node nextChild;
-        char ch = charr.remove(0);
+        char ch = string.charAt(0);
         if (node.children.containsKey(ch)) {
             nextChild = node.children.get(ch);
         } else {
@@ -49,11 +43,11 @@ public class Dictionary {
             node.children.put(ch, nextChild);
         }
 
-        if (charr.isEmpty()) {
+        if (string.length()==1) {
             nextChild.endOfWord = true;
             return;
         } else {
-            insertWord(charr,nextChild);
+            insertWord(string.substring(1),nextChild);
         }
     }
 

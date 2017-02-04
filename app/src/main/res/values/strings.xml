@@ -22,8 +22,8 @@
     <string name="search_hint">Enter Search Here</string>
 
     <string name="ack_text">\
-    Github user : prettymuchbryce for provinding an implementation of the trie
-        dictionary data structure in java : prettymuchbryce:dictionary.java\n\
+    Used java to split the wordlist into small files of the first three characters.
+        Used help from online computer science websites like stackoverflow and geeks for geeks for reading string from files\n\
     \n\
     StackOverflow for helping me solve a problem that I was facing when accessing context
         from a static perspective.
