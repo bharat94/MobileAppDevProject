@@ -77,6 +77,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // Word game - Scrobble Button
+        final Button b5 = (Button) findViewById(R.id.button5);
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scrobble.activities.ScrobbleMainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+        //Quit button
         final Button bq = (Button) findViewById(R.id.buttonQuit);
         bq.setOnClickListener(new View.OnClickListener() {
             @Override
