@@ -184,14 +184,26 @@ public class ScroggleGameFragment extends Fragment {
             }
 
             //Phase 2 loading
-            transitionCharacters.add('A');
-            ((Button)mPhaseTwoTiles[large].getView()).setText(String.valueOf(transitionCharacters.get(large)));
+            //transitionCharacters.add('A');
+            //((Button)mPhaseTwoTiles[large].getView()).setText(String.valueOf(transitionCharacters.get(large)));
         }
 
     }
 
-    public void updateUIForPhaseTwo(){
+    public void updateUIForPhaseTwo() {
+        for (int large = 0; large < 9; large++) {
 
+            char ch = '\0';
+
+            for (int small = 0; small < 9; small++) {
+                if (mSmallTiles[large][small].getView().getBackground().getLevel() == 1)
+                    ch = ((Button) mSmallTiles[large][small].getView()).getText().charAt(0);
+            }
+
+            //Phase 2 loading
+            transitionCharacters.add(ch);
+            ((Button) mPhaseTwoTiles[large].getView()).setText(String.valueOf(ch));
+        }
     }
 
 
