@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
 
 public class ScroggleTimerFragment extends Fragment {
@@ -30,7 +31,7 @@ public class ScroggleTimerFragment extends Fragment {
             inflater.inflate(R.layout.fragment_scroggle_timer, container, false);
       final TextView timer = (TextView) rootView.findViewById(R.id.timer_tv);
       mWordText = (TextView) rootView.findViewById(R.id.word);
-      CountDownTimer ct = new CountDownTimer(90000,1000) {
+      CountDownTimer ct = new CountDownTimer(10000,1000) {
          @Override
          public void onTick(long l) {
             int a = (int) (l/1000);
@@ -43,6 +44,7 @@ public class ScroggleTimerFragment extends Fragment {
          @Override
          public void onFinish() {
             Toast.makeText(getActivity(),"Game's Up baby!!",Toast.LENGTH_LONG).show();
+            ((ScroggleGameActivity) getActivity()).proceedToPhase2();
          }
       }.start();
 

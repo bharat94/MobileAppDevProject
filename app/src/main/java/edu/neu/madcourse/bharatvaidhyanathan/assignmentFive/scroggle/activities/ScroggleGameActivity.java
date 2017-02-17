@@ -21,6 +21,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleGameFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleTimerFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.Tile;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.fragments.GameFragment;
@@ -63,4 +64,24 @@ public class ScroggleGameActivity extends Activity {
       mMediaPlayer.reset();
       mMediaPlayer.release();
    }
+
+
+   public void proceedToPhase2()
+   {
+      AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+      builder1.setMessage("Now select a letter from each grid to proceed to phase 2.");
+      builder1.setCancelable(false);
+
+      builder1.setPositiveButton(
+              "Ok",
+              new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).updateUIForTransitionPhase();
+                 }
+              });
+      builder1.show();
+
+   }
+
 }

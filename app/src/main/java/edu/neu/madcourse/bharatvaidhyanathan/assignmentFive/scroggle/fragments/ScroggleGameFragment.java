@@ -9,11 +9,13 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -143,6 +145,29 @@ public class ScroggleGameFragment extends Fragment {
                 // ...
             }
         }
+    }
+
+
+    public void updateUIForTransitionPhase()
+    {
+        for (int large = 0; large < 9; large++) {
+            for (int small = 0; small < 9; small++) {
+
+                if(mSmallTiles[large][small].getView().getBackground().getLevel()==1)
+                {
+                    mSmallTiles[large][small].getView().getBackground().setLevel(0);
+
+                }
+                else
+                {
+                    mSmallTiles[large][small].getView().getBackground().setLevel(0);
+                    ((Button)mSmallTiles[large][small].getView()).setText("");
+                    mSmallTiles[large][small].getView().setEnabled(false);
+                }
+            }
+
+        }
+
     }
 
 

@@ -15,8 +15,8 @@ import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.DictObj;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ProgressDialog progress;
-    private Intent dictionaryIntent;
+    //private ProgressDialog progress;
+    //private Intent dictionaryIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //initialize the dictionary intent
-                dictionaryIntent = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.TestDictionaryActivity.class);
+                //dictionaryIntent = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.TestDictionaryActivity.class);
                 //setup and start the progress dialog
-                progress = ProgressDialog.show(MainActivity.this, "Loading", "Loading the Dictionary...", true, false);
-                SearchThread searchThread = new SearchThread(4000);
+                //progress = ProgressDialog.show(MainActivity.this, "Loading", "Loading the Dictionary...", true, false);
+                SearchThread searchThread = new SearchThread(new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.TestDictionaryActivity.class), ProgressDialog.show(MainActivity.this, "Loading", "Loading the Dictionary...", true, false));
                 searchThread.start();
 
 
@@ -82,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ScroggleMainActivity.class);
-                startActivity(i);
+                //Intent i = new Intent(MainActivity.this, ScroggleMainActivity.class);
+                //progress = ProgressDialog.show(MainActivity.this, "Loading", "Loading the Word Game...", true, false);
+                SearchThread searchThread = new SearchThread(new Intent(MainActivity.this, ScroggleMainActivity.class), ProgressDialog.show(MainActivity.this, "Loading", "Loading the Word Game...", true, false));
+                searchThread.start();
             }
         });
 
@@ -104,10 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
     private class SearchThread extends Thread {
 
-        private int time;
+        private Intent intent;
+        private ProgressDialog progressDialog;
 
-        public SearchThread(int time) {
-            this.time = time;
+        public SearchThread(Intent intent, ProgressDialog progressDialog) {
+            this.intent = intent;
+            this.progressDialog = progressDialog;
         }
 
         @Override
@@ -122,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 //displaySearchResults(search);
-                startActivity(dictionaryIntent);
-                progress.dismiss();
+                startActivity(intent);
+                progressDialog.dismiss();
             }
         };
     }
