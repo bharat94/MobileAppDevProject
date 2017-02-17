@@ -16,6 +16,14 @@
    tools:context=".assignmentOne.tictactoe.activities.GameActivity">
 
    <Button
+       android:id="@+id/button_done"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:elevation="@dimen/elevation_low"
+       android:drawableTop="@drawable/done"
+       android:text="@string/done_label"/>
+
+   <Button
        android:id="@+id/button_mute"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"

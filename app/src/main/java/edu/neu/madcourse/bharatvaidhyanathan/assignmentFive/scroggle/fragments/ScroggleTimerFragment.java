@@ -22,11 +22,13 @@ import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
 
 public class ScroggleTimerFragment extends Fragment {
+   boolean b;
 
    private TextView mWordText;
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
+      b = false;
       View rootView =
             inflater.inflate(R.layout.fragment_scroggle_timer, container, false);
       final TextView timer = (TextView) rootView.findViewById(R.id.timer_tv);
@@ -43,8 +45,11 @@ public class ScroggleTimerFragment extends Fragment {
 
          @Override
          public void onFinish() {
-            Toast.makeText(getActivity(),"Game's Up baby!!",Toast.LENGTH_LONG).show();
-            ((ScroggleGameActivity) getActivity()).proceedToPhase2();
+            if(!b) {
+               Toast.makeText(getActivity(), "Game's Up baby!!", Toast.LENGTH_LONG).show();
+               ((ScroggleGameActivity) getActivity()).proceedToPhase2();
+               b = true;
+            }
          }
       }.start();
 
@@ -54,6 +59,10 @@ public class ScroggleTimerFragment extends Fragment {
    public void displayWord(String word)
    {
       mWordText.setText(word.toUpperCase());
+   }
+
+   public void setTimerDone(){
+      b = true;
    }
 
 }

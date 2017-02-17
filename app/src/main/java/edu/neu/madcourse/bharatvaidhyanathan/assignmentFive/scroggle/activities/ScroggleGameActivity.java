@@ -21,6 +21,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleControlFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleGameFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleTimerFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.Tile;
@@ -78,6 +79,8 @@ public class ScroggleGameActivity extends Activity {
                  public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                     ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).updateUIForTransitionPhase();
+                    ((ScroggleControlFragment) getFragmentManager().findFragmentById(R.id.fragment_game_controls)).changeDoneButton();
+                    ((ScroggleTimerFragment) getFragmentManager().findFragmentById(R.id.fragment_timer)).setTimerDone();
                  }
               });
       builder1.show();

@@ -13,20 +13,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
 
 public class ScroggleControlFragment extends Fragment {
 
+   public View rootView;
+   public boolean isOnClickChanged;
+
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
-      View rootView =
+      isOnClickChanged = false;
+      rootView =
             inflater.inflate(R.layout.fragment_scroggle_control, container, false);
       View main = rootView.findViewById(R.id.button_main);
       View restart = rootView.findViewById(R.id.button_restart);
       View mute = rootView.findViewById(R.id.button_mute);
+      View done = rootView.findViewById(R.id.button_done);
 
       main.setOnClickListener(new View.OnClickListener() {
          @Override
@@ -34,13 +41,33 @@ public class ScroggleControlFragment extends Fragment {
             getActivity().finish();
          }
       });
+
       restart.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
             ((GameActivity) getActivity()).restartGame();
          }
       });
+
+      done.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            if(!isOnClickChanged) {
+               ((ScroggleGameActivity) getActivity()).proceedToPhase2();
+               isOnClickChanged = true;
+            }
+            else{
+               Toast.makeText(getActivity(), "Nothing Next", Toast.LENGTH_SHORT).show();
+            }
+         }
+      });
+
       return rootView;
+   }
+
+
+   public void changeDoneButton(){
+      isOnClickChanged = true;
    }
 
 }
