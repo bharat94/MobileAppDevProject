@@ -56,6 +56,7 @@ public class ScroggleGameFragment extends Fragment {
     private   String  words[]  = new String[9];
     private char[][] charr;
     private ArrayList<Character> transitionCharacters;
+    private ArrayList<Integer>[] positionMemory = (ArrayList<Integer>[]) new ArrayList[9];
 
 
 
@@ -110,6 +111,7 @@ public class ScroggleGameFragment extends Fragment {
         for (int i =0;i<9;i++)
         {
             words[i]="";
+            positionMemory[i] = new ArrayList<Integer>();
         }
     }
 
@@ -143,6 +145,7 @@ public class ScroggleGameFragment extends Fragment {
                                 smallTile.animate();
                                 smallTile.getView().getBackground().setLevel(0);
                                 words[fLarge] = words[fLarge].substring(0, words[fLarge].length()-1);
+                                positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
                                 ((ScroggleGameActivity)getActivity()).displayword(words[fLarge]);
                             }
                             else{
@@ -151,12 +154,18 @@ public class ScroggleGameFragment extends Fragment {
                             }
                         }
                         else {
-                            smallTile.animate();
-                            // ...
-                            smallTile.getView().getBackground().setLevel(1);
-                            words[fLarge] = words[fLarge] + inner.getText().toString();
-                            ((ScroggleGameActivity)getActivity()).displayword(words[fLarge]);
+
+                            if(positionMemory[fLarge].isEmpty() || isNeighbor(fSmall, positionMemory[fLarge].get(positionMemory[fLarge].size()-1))) {
+                                smallTile.animate();
+                                // ...
+                                smallTile.getView().getBackground().setLevel(1);
+                                words[fLarge] = words[fLarge] + inner.getText().toString();
+                                positionMemory[fLarge].add(fSmall);
+                                ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                            }
                         }
+
+                        System.out.println(positionMemory[fLarge]);
                     }
                 });
                 // ...
@@ -204,6 +213,15 @@ public class ScroggleGameFragment extends Fragment {
             transitionCharacters.add(ch);
             ((Button) mPhaseTwoTiles[large].getView()).setText(String.valueOf(ch));
         }
+    }
+
+
+    public boolean isNeighbor(int i, int j){
+        return isNeighborR(i/3, i%3, j/3, j%3);
+    }
+
+    public boolean isNeighborR(int r1, int c1, int r2, int c2){
+        return (Math.abs(r1 - r2) <= 1 && Math.abs(c1 - c2) <= 1);
     }
 
 

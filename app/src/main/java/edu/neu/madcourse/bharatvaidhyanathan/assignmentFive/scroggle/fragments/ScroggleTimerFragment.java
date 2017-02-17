@@ -33,7 +33,7 @@ public class ScroggleTimerFragment extends Fragment {
             inflater.inflate(R.layout.fragment_scroggle_timer, container, false);
       final TextView timer = (TextView) rootView.findViewById(R.id.timer_tv);
       mWordText = (TextView) rootView.findViewById(R.id.word);
-      CountDownTimer ct = new CountDownTimer(10000,1000) {
+      CountDownTimer ct = new CountDownTimer(40000,1000) {
          @Override
          public void onTick(long l) {
             int a = (int) (l/1000);
