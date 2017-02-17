@@ -57,7 +57,8 @@ public class ScroggleControlFragment extends Fragment {
                isOnClickChanged = true;
             }
             else{
-               Toast.makeText(getActivity(), "Nothing Next", Toast.LENGTH_SHORT).show();
+               //Toast.makeText(getActivity(), "Nothing Next", Toast.LENGTH_SHORT).show();
+               ((ScroggleGameActivity) getActivity()).initializePhase2();
             }
          }
       });

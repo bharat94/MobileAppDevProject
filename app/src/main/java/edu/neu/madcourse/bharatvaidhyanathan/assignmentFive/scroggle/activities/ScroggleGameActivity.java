@@ -11,12 +11,15 @@ package edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -70,7 +73,7 @@ public class ScroggleGameActivity extends Activity {
    public void proceedToPhase2()
    {
       AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-      builder1.setMessage("Now select a letter from each grid to proceed to phase 2.");
+      builder1.setMessage("Please select one cell from each grid to proceed");
       builder1.setCancelable(false);
 
       builder1.setPositiveButton(
@@ -85,6 +88,26 @@ public class ScroggleGameActivity extends Activity {
               });
       builder1.show();
 
+   }
+
+   public void initializePhase2(){
+      AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+      builder1.setMessage("Yay! Solve the Boggle now!");
+      builder1.setCancelable(false);
+
+      builder1.setPositiveButton(
+              "Proceed",
+              new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+
+                    ((GridLayout)findViewById(R.id.phase1)).setVisibility(View.GONE);
+                    ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).updateUIForPhaseTwo();
+                    ((GridLayout)findViewById(R.id.phase2)).setVisibility(View.VISIBLE);
+
+                 }
+              });
+      builder1.show();
    }
 
 }

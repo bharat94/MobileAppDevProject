@@ -16,22 +16,22 @@
    android:padding="@dimen/small_board_padding"
    >
 
-   <Button android:id="@+id/phase2_small1" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small1" style="@style/PhaseTwoLetterGridStyle"
        android:text="A"       android:layout_column="0" android:layout_row="0"/>
-   <Button android:id="@+id/phase2_small2" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small2" style="@style/PhaseTwoLetterGridStyle"
         android:text="B"        android:layout_column="1" android:layout_row="0"/>
-   <Button android:id="@+id/phase2_small3" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small3" style="@style/PhaseTwoLetterGridStyle"
             android:text="C"    android:layout_column="2" android:layout_row="0"/>
-   <Button android:id="@+id/phase2_small4" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small4" style="@style/PhaseTwoLetterGridStyle"
           android:text="D"      android:layout_column="0" android:layout_row="1"/>
-   <Button android:id="@+id/phase2_small5" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small5" style="@style/PhaseTwoLetterGridStyle"
          android:text="E"       android:layout_column="1" android:layout_row="1"/>
-   <Button android:id="@+id/phase2_small6" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small6" style="@style/PhaseTwoLetterGridStyle"
             android:text="F"    android:layout_column="2" android:layout_row="1"/>
-   <Button android:id="@+id/phase2_small7" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small7" style="@style/PhaseTwoLetterGridStyle"
              android:text="G"   android:layout_column="0" android:layout_row="2"/>
-   <Button android:id="@+id/phase2_small8" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small8" style="@style/PhaseTwoLetterGridStyle"
           android:text="H"      android:layout_column="1" android:layout_row="2"/>
-   <Button android:id="@+id/phase2_small9" style="@style/LetterGridStyle"
+   <Button android:id="@+id/phase2_small9" style="@style/PhaseTwoLetterGridStyle"
             android:text="I"    android:layout_column="2" android:layout_row="2"/>
 </GridLayout>

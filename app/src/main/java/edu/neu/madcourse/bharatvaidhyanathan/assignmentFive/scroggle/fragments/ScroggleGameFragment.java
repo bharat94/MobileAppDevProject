@@ -43,6 +43,11 @@ public class ScroggleGameFragment extends Fragment {
     static private int mSmallIds[] = {R.id.small1, R.id.small2, R.id.small3,
             R.id.small4, R.id.small5, R.id.small6, R.id.small7, R.id.small8,
             R.id.small9,};
+
+    static private int phaseTwoIds[] = {R.id.phase2_small1, R.id.phase2_small2, R.id.phase2_small3,
+            R.id.phase2_small4, R.id.phase2_small5, R.id.phase2_small6, R.id.phase2_small7,
+            R.id.phase2_small8, R.id.phase2_small9};
+
     private Handler mHandler = new Handler();
     private TileScrobble mEntireBoard = new TileScrobble(this);
     private TileScrobble mLargeTiles[] = new TileScrobble[9];
@@ -50,8 +55,11 @@ public class ScroggleGameFragment extends Fragment {
     private Set<Tile> mAvailable = new HashSet<Tile>();
     private   String  words[]  = new String[9];
     private char[][] charr;
+    private ArrayList<Character> transitionCharacters;
 
 
+
+    private TileScrobble mPhaseTwoTiles[] = new TileScrobble[9];
 
 
     @Nullable
@@ -84,10 +92,14 @@ public class ScroggleGameFragment extends Fragment {
 
     public void initGame() {
         Log.d("UT3", "init game");
+        transitionCharacters = new ArrayList<Character>();
         mEntireBoard = new TileScrobble(this);
         // Create all the tiles
         for (int large = 0; large < 9; large++) {
             mLargeTiles[large] = new TileScrobble(this);
+            //phase 2 code start
+            mPhaseTwoTiles[large] = new TileScrobble(this);
+            //phase 2 code end
             for (int small = 0; small < 9; small++) {
                 mSmallTiles[large][small] = new TileScrobble(this);
             }
@@ -106,6 +118,11 @@ public class ScroggleGameFragment extends Fragment {
         for (int large = 0; large < 9; large++) {
             View outer = rootView.findViewById(mLargeIds[large]);
             mLargeTiles[large].setView(outer);
+
+            //phase 2 code start
+            View outer_two = rootView.findViewById(phaseTwoIds[large]);
+            mPhaseTwoTiles[large].setView(outer_two);
+            //phase 2 code end
 
             for (int small = 0; small < 9; small++) {
                 final Button inner = (Button) outer.findViewById
@@ -166,7 +183,14 @@ public class ScroggleGameFragment extends Fragment {
                 }
             }
 
+            //Phase 2 loading
+            transitionCharacters.add('A');
+            ((Button)mPhaseTwoTiles[large].getView()).setText(String.valueOf(transitionCharacters.get(large)));
         }
+
+    }
+
+    public void updateUIForPhaseTwo(){
 
     }
 
