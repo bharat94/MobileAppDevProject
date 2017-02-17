@@ -6,7 +6,7 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
 ***/
-package edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scrobble.fragments;
+package edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -18,9 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.NineLetterDict;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
 
-public class ScrobbleMainFragment extends Fragment {
+public class ScroggleMainFragment extends Fragment {
 
    private AlertDialog mDialog;
 
@@ -28,7 +30,7 @@ public class ScrobbleMainFragment extends Fragment {
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
       View rootView =
-            inflater.inflate(R.layout.fragment_scrobble_main, container, false);
+            inflater.inflate(R.layout.fragment_scroggle_main, container, false);
       // Handle buttons here...
       View newButton = rootView.findViewById(R.id.new_button);
       View continueButton = rootView.findViewById(R.id.continue_button);
@@ -36,15 +38,16 @@ public class ScrobbleMainFragment extends Fragment {
       newButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), GameActivity.class);
+            NineLetterDict.getInstance(getActivity()).resetWords();
+            Intent intent = new Intent(getActivity(), ScroggleGameActivity.class);
             getActivity().startActivity(intent);
          }
       });
       continueButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), GameActivity.class);
-            intent.putExtra(GameActivity.KEY_RESTORE, true);
+            Intent intent = new Intent(getActivity(), ScroggleGameActivity.class);
+            intent.putExtra(ScroggleGameActivity.KEY_RESTORE, true);
             getActivity().startActivity(intent);
          }
       });

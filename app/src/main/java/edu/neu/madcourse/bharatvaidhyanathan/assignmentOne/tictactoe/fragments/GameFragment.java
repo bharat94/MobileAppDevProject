@@ -81,6 +81,8 @@ public class GameFragment extends Fragment {
       return rootView;
    }
 
+
+
    private void initViews(View rootView) {
       mEntireBoard.setView(rootView);
       for (int large = 0; large < 9; large++) {

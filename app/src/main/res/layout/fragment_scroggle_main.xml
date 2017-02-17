@@ -16,13 +16,13 @@
    android:elevation="@dimen/elevation_high"
    android:orientation="vertical"
    android:padding="@dimen/menu_padding"
-   tools:context=".assignmentFive.scrobble.activities.ScrobbleMainActivity">
+   tools:context=".assignmentFive.scroggle.activities.ScroggleMainActivity">
 
    <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/menu_space"
-      android:text="🅢🅒🅡🅞🅑🅑🅛🅔"
+      android:text="🅢🅒🅡🅞🅖🅖🅛🅔"
       android:textAppearance="?android:textAppearanceLarge"
        android:textColor="@color/thinking_background_color"
       android:textSize="@dimen/menu_text_size"/>

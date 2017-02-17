@@ -1,9 +1,7 @@
 package edu.neu.madcourse.bharatvaidhyanathan;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.AboutMeActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.DictObj;
 
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scrobble.activities.ScrobbleMainActivity.class);
+                Intent i = new Intent(MainActivity.this, ScroggleMainActivity.class);
                 startActivity(i);
             }
         });

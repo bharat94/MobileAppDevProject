@@ -6,23 +6,22 @@
  * We make no guarantees that this code is fit for any purpose. 
  * Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
 ***/
-package edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scrobble.activities;
+package edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities;
 
-import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 
-public class ScrobbleMainActivity extends AppCompatActivity {
+public class ScroggleMainActivity extends AppCompatActivity {
    MediaPlayer mMediaPlayer;
    // ...
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_scrobble_main);
+      setContentView(R.layout.activity_scroggle_main);
    }
 
    @Override
