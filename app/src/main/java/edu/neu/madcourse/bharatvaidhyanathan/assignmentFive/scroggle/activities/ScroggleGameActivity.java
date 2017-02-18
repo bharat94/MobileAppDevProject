@@ -193,7 +193,7 @@ public class ScroggleGameActivity extends Activity {
          ((ScroggleTimerFragment) getFragmentManager().findFragmentById(R.id.fragment_timer)).setScore(new_score);
       }
 
-      System.out.println("Reset");
+      //System.out.println("Reset");
       resetBoard();
    }
 
@@ -208,7 +208,7 @@ public class ScroggleGameActivity extends Activity {
       builder1.setCancelable(false);
 
       builder1.setPositiveButton(
-              "Proceed",
+              "OK",
               new DialogInterface.OnClickListener() {
                  public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();

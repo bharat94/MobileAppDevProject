@@ -70,7 +70,7 @@ public class ScroggleTimerFragment extends Fragment {
                     b = true;
                 }
                 else{
-                    Toast.makeText(getActivity(), "Game's Up baby!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "That's it, Game's up!!!", Toast.LENGTH_LONG).show();
                     if(getActivity().getClass().equals(ScroggleGameActivity.class))
                         ((ScroggleGameActivity) getActivity()).goToThanksPhase();
                 }
@@ -93,7 +93,7 @@ public class ScroggleTimerFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        System.out.println("onpaused called");
+        //System.out.println("onpaused called");
         ct.cancel();
     }
 
@@ -120,7 +120,7 @@ public class ScroggleTimerFragment extends Fragment {
         if(!hs.contains(s) && GlobDict.getInstance(getActivity()).search(s)){
             String s1 = mScoreText.getText().toString();
             int a = Integer.parseInt(s1.substring(8, s1.length()-1));
-            System.out.println(s1+","+a);
+            //System.out.println(s1+","+a);
             a+=(s.length()*10);
             mScoreText.setText("Score : "+a);
             score = a;

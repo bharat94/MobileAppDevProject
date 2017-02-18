@@ -157,13 +157,13 @@ public class ScroggleGameFragment extends Fragment {
                     else {
                         //add letter
 
-                        System.out.println("temp : "+temp);
+                        //System.out.println("temp : "+temp);
                         if(temp==-1 || isNeighbor(fLarge1, temp) ){
                             phaseTwoString += ((Button) outer_two).getText().toString();
-                            System.out.println(phaseTwoString);
+                            //System.out.println(phaseTwoString);
                             if(phaseTwoString.length()>2 && GlobDict.getInstance(getActivity()).search(phaseTwoString) && !hs.contains(phaseTwoString)) {
                                 //updateScore1(phaseTwoString.length());
-                                System.out.println(phaseTwoString);
+                                //System.out.println(phaseTwoString);
                                 hs.add(phaseTwoString);
                             }
                             ((ScroggleGameActivity) getActivity()).displayword(phaseTwoString);
@@ -199,7 +199,7 @@ public class ScroggleGameFragment extends Fragment {
                         {
                             if(isTransition) {
                                 smallTile.animate();
-                                System.out.println("is transition");
+                                //System.out.println("is transition");
                                 smallTile.getView().getBackground().setLevel(0);
                             }
                             else{
@@ -212,7 +212,7 @@ public class ScroggleGameFragment extends Fragment {
                                     words[fLarge] = words[fLarge].substring(0, words[fLarge].length() - 1);
                                     positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
                                     if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
-                                        System.out.println(words[fLarge]);
+                                        //System.out.println(words[fLarge]);
                                         ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
                                     } else {
                                         ((ScroggleGameActivity) getActivity()).displayword("");
@@ -230,7 +230,7 @@ public class ScroggleGameFragment extends Fragment {
 
                             if(isTransition){
                                 smallTile.animate();
-                                System.out.println("is transition");
+                                //System.out.println("is transition");
                                 smallTile.getView().getBackground().setLevel(1);
                             }
                             else {
@@ -242,7 +242,7 @@ public class ScroggleGameFragment extends Fragment {
                                     words[fLarge] = words[fLarge] + inner.getText().toString();
                                     positionMemory[fLarge].add(fSmall);
                                     if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
-                                        System.out.println(words[fLarge]);
+                                        //System.out.println(words[fLarge]);
                                         ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
                                     } else {
                                         ((ScroggleGameActivity) getActivity()).displayword("");
@@ -256,7 +256,7 @@ public class ScroggleGameFragment extends Fragment {
                             }
                         }
 
-                        System.out.println(positionMemory[fLarge]);
+                        //System.out.println(positionMemory[fLarge]);
                     }
                 });
                 // ...
@@ -323,28 +323,28 @@ public class ScroggleGameFragment extends Fragment {
         int newScore = 0;
         for(int i=0; i<9; i++){
             String s = words[i];
-            System.out.print("HEYEYE : "+ s+" , ");
+            //System.out.print("HEYEYE : "+ s+" , ");
 
             if(s.length()>2 && GlobDict.getInstance(getActivity()).search(s)) {
                 newScore += (s.length() * factor);
-                System.out.println("score factor: "+(s.length() * factor)+", word in dic");
+                //System.out.println("score factor: "+(s.length() * factor)+", word in dic");
             }
             else{
-                System.out.println();
+                //System.out.println();
             }
         }
         score = newScore;
 
         ((ScroggleGameActivity) getActivity()).setScore(score);
 
-        System.out.println("new Score : "+score);
+        //System.out.println("new Score : "+score);
     }
 
 
     public void updateScore1(int newScore){
         score += newScore;
         ((ScroggleGameActivity) getActivity()).setScore(score);
-        System.out.println("new Score : "+score);
+        //System.out.println("new Score : "+score);
     }
 
     public void resetBoard(){
