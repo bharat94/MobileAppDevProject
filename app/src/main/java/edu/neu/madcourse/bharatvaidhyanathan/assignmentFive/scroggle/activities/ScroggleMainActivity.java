@@ -14,30 +14,58 @@ import android.support.v7.app.AppCompatActivity;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 
-public class ScroggleMainActivity extends AppCompatActivity {
-   MediaPlayer mMediaPlayer;
-   // ...
 
+import static edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity.mMediaPlayer;
+
+public class ScroggleMainActivity extends AppCompatActivity {
+   // ...
+   public static boolean MUSIC_ON = true;
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_scroggle_main);
    }
 
+
+   public void pauseMusic()
+   {
+      if(ScroggleMainActivity.MUSIC_ON) {
+         {
+            mMediaPlayer.stop();
+            mMediaPlayer.reset();
+            mMediaPlayer.release();
+         }
+      }
+   }
+
+   public void startMusic()
+   {
+      if(!ScroggleMainActivity.MUSIC_ON) {
+         mMediaPlayer = MediaPlayer.create(this, R.raw.happy_song);
+         mMediaPlayer.setLooping(true);
+         mMediaPlayer.start();
+      }
+   }
+
    @Override
    protected void onResume() {
       super.onResume();
-      mMediaPlayer = MediaPlayer.create(this, R.raw.a_guy_1_epicbuilduploop);
-      mMediaPlayer.setVolume(0.5f, 0.5f);
-      mMediaPlayer.setLooping(true);
-      mMediaPlayer.start();
+         if(MUSIC_ON)
+      {
+         mMediaPlayer = MediaPlayer.create(this, R.raw.happy_song);
+         mMediaPlayer.setVolume(0.5f, 0.5f);
+         mMediaPlayer.setLooping(true);
+         mMediaPlayer.start();
+      }
    }
 
    @Override
    protected void onPause() {
       super.onPause();
-      mMediaPlayer.stop();
-      mMediaPlayer.reset();
-      mMediaPlayer.release();
+      if(MUSIC_ON) {
+         mMediaPlayer.stop();
+         mMediaPlayer.reset();
+         mMediaPlayer.release();
+      }
    }
 }

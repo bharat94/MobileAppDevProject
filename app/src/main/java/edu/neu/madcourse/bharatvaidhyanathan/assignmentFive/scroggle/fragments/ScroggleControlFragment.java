@@ -13,11 +13,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
+
+import static edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity.MUSIC_ON;
 
 public class ScroggleControlFragment extends Fragment {
 
@@ -31,23 +35,45 @@ public class ScroggleControlFragment extends Fragment {
       rootView =
             inflater.inflate(R.layout.fragment_scroggle_control, container, false);
       View main = rootView.findViewById(R.id.button_main);
-      View restart = rootView.findViewById(R.id.button_restart);
-      View mute = rootView.findViewById(R.id.button_mute);
+      final View mute = rootView.findViewById(R.id.button_mute);
       View done = rootView.findViewById(R.id.button_done);
-
+      View pause = rootView.findViewById(R.id.button_pause);
+       pause.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               ((ScroggleGameActivity)getActivity()).pausetheGame();
+           }
+       });
       main.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            getActivity().finish();
+             ((ScroggleGameActivity)getActivity()).goToThanksPhase();
+             ScroggleTimerFragment.ct.cancel();
          }
       });
 
-      restart.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-            ((GameActivity) getActivity()).restartGame();
-         }
-      });
+
+       mute.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               if(ScroggleMainActivity.MUSIC_ON) {
+
+                   ((Button)mute).setText("Music Off");
+                   ((ScroggleGameActivity) getActivity()).pauseMusic();
+                   ScroggleMainActivity.MUSIC_ON =false;
+
+               }
+               else
+               {
+
+                   ((Button)mute).setText("Music On");
+                   ((ScroggleGameActivity)getActivity()).startMusic();
+                   ScroggleMainActivity.MUSIC_ON =true;
+               }
+           }
+       });
+
+
 
       done.setOnClickListener(new View.OnClickListener() {
          @Override

@@ -22,7 +22,8 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/menu_space"
-      android:text="🅢🅒🅡🅞🅖🅖🅛🅔"
+      android:text="SCROGGLE"
+       android:padding="10dp"
       android:textAppearance="?android:textAppearanceLarge"
        android:textColor="@color/thinking_background_color"
       android:textSize="@dimen/menu_text_size"/>
@@ -32,6 +33,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/menu_button_margin"
+       android:visibility="gone"
       android:padding="@dimen/menu_button_padding"
       android:text="@string/continue_label"/>
 
@@ -44,12 +46,40 @@
       android:padding="@dimen/menu_button_padding"
       android:text="@string/new_game_label"/>
 
+
    <Button
-      android:id="@+id/about_button"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:layout_margin="@dimen/menu_button_margin"
-      android:padding="@dimen/menu_button_padding"
-      android:text="@string/about_label"/>
+       android:id="@+id/music_btn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_margin="@dimen/menu_button_margin"
+       android:padding="@dimen/menu_button_padding"
+       android:text="Music On"/>
+   <Button
+       android:id="@+id/instruction_btn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_margin="@dimen/menu_button_margin"
+       android:padding="@dimen/menu_button_padding"
+       android:text="Instructions"/>
+
+   <Button
+       android:id="@+id/ack_btn"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_margin="@dimen/menu_button_margin"
+       android:padding="@dimen/menu_button_padding"
+       android:text="Acknowledgement"/>
+   <Button
+       android:id="@+id/quit_btn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_margin="@dimen/menu_button_margin"
+       android:padding="@dimen/menu_button_padding"
+       android:text="Quit"/>
+
+
 </LinearLayout>

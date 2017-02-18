@@ -38,27 +38,38 @@ public class GlobDict {
 
     public boolean search (String str){
 
-        if(str.length() < 2) return false;
+        if(str.length() < 3) return false;
 
         str = str.toLowerCase();
+        String sm = str.substring(0,3);
 
-        if(str.length() == 3) {
+        if(str.length() >= 3){try {
+            InputStream is = am.open("words/"+sm+".txt");
+            if(is == null){
+                is.close();
+                return false;
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            wordlist = new ArrayList<>();
+
+            String s;
             try {
-                InputStream is = am.open("words/"+str+".txt");
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                wordlist = new ArrayList<>();
-
-                String s;
                 while((s = br.readLine())!=null){
                     wordlist.add(s);
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            finally {
+                is.close();
+                br.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        if(str.length() >= 3){
+
             if(wordlist==null || wordlist.isEmpty()) return false;
             return wordlist.contains(str);
         }

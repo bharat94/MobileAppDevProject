@@ -12,6 +12,7 @@
    android:layout_width="match_parent"
    android:layout_height="match_parent"
    android:orientation="vertical"
+    android:gravity="center"
    android:padding="@dimen/timer_padding"
    >
 
@@ -35,7 +36,7 @@
 
       <TextView
           android:id="@+id/text_view_score"
-          android:text="0"
+          android:text="Score : 0"
           android:layout_weight="0.5"
           android:textStyle="bold"
           android:fontFamily="sans-serif"

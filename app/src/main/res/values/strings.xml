@@ -25,16 +25,32 @@
 
     <string name="ack_text">\
         <b>Logic : </b>\n
-    Used java to split the wordlist into small files of the first three characters.
         Used help from online computer science websites like stackoverflow and geeks for geeks for reading string from files\n\n
         <b>Images : </b>\n
-        Background image for the app was obtained from google images. (FansShare) \n\n
+        Background image for the app was obtained from google images and then converted into negative to match the look.\n\n
         <b>Sounds : </b>\n
-        New Sounds added to the TicTacToe was obtained from Non Copyright Sounds (Youtube) \n\n
+        New Sounds added to the Scrobble Game was obtained from Non Copyright Sounds (Youtube) \n\n
 
         <b>Issues : </b>\n
         StackOverflow for helping me solve a problem that I was facing when accessing context
-        from a static perspective.
+        from a static perspective.\n\n
+
+        <b>Help from people : </b>\n
+        Vaibhav Shukla
+
+    </string>
+
+    <string name="inst_text">\
+        <b>Hello!! </b>\n
+    Welcome to Scroggle, a game for smart people.
+        You would have to race against time to finish the game.\n\n
+        <b>Phase 1 : </b>\n
+        On a board, you have to play scrobble. In each of the 9 small grids, try to come up with a word as long as you can \n\n
+        <b>Phase 2 : </b>\n
+        Now that you are done with scrabble, its time to select some letters from the correct words that you made to go to the next phase of the game (Boggle!)\n\n
+
+        <b>Phase 3 : </b>\n
+        Aaaand! Its Boggle time! Now that you have scored a lot, you would play boggle from the letters that you selected. Try to maximize your points!
     </string>
 
     <string name="about_text">\

@@ -16,11 +16,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.NineLetterDict;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
+
+import static edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity.MUSIC_ON;
 
 public class ScroggleMainFragment extends Fragment {
 
@@ -34,7 +38,48 @@ public class ScroggleMainFragment extends Fragment {
       // Handle buttons here...
       View newButton = rootView.findViewById(R.id.new_button);
       View continueButton = rootView.findViewById(R.id.continue_button);
-      View aboutButton = rootView.findViewById(R.id.about_button);
+      View ackButton = rootView.findViewById(R.id.ack_btn);
+      View quitButton = rootView.findViewById(R.id.quit_btn);
+      final View musicButton = rootView.findViewById(R.id.music_btn);
+      View instruction = rootView.findViewById(R.id.instruction_btn);
+
+      instruction.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.inst_text)
+                    .setTitle("Instructions");
+            // 3. Get the AlertDialog from create()
+            final android.support.v7.app.AlertDialog dialog = builder.create();
+
+            //setting the title
+            builder.setTitle("Scroggle");
+            dialog.show();
+         }
+      });
+      musicButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            if(MUSIC_ON) {
+
+               ((Button)musicButton).setText("Music Off");
+               ((ScroggleMainActivity) getActivity()).pauseMusic();
+               MUSIC_ON =false;
+
+            }
+               else
+            {
+
+               ((Button)musicButton).setText("Music On");
+               ((ScroggleMainActivity)getActivity()).startMusic();
+               MUSIC_ON =true;
+            }
+         }
+      });
+
+
       newButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
@@ -51,22 +96,31 @@ public class ScroggleMainFragment extends Fragment {
             getActivity().startActivity(intent);
          }
       });
-      aboutButton.setOnClickListener(new View.OnClickListener() {
+      ackButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(R.string.about_text);
-            builder.setCancelable(false);
-            builder.setPositiveButton(R.string.ok_label,
-                  new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // nothing
-                     }
-                  });
-            mDialog = builder.show();
+            android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage(R.string.ack_text)
+                    .setTitle("Acknowledgements");
+            // 3. Get the AlertDialog from create()
+            final android.support.v7.app.AlertDialog dialog = builder.create();
+
+            //setting the title
+            builder.setTitle("Scroggle");
+            dialog.show();
+
          }
       });
+
+      quitButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+            getActivity().finish();
+         }
+      });
+
       return rootView;
    }
 

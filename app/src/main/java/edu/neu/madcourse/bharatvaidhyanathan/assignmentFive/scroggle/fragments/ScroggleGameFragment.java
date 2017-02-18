@@ -64,8 +64,10 @@ public class ScroggleGameFragment extends Fragment {
     private HashSet<String> hs = new HashSet<String>();
     private String phaseTwoString = "";
     private ArrayList<Integer> phaseTwoPositionMemory = new ArrayList<>();
-
-
+    public static boolean isTransition = false;
+    private int mSoundX, mSoundO, mSoundMiss, mSoundRewind;
+    private SoundPool mSoundPool;
+    private float mVolume = 1f;
 
     private TileScrobble mPhaseTwoTiles[] = new TileScrobble[9];
 
@@ -92,6 +94,11 @@ public class ScroggleGameFragment extends Fragment {
         charr = NineLetterDict.getInstance(getActivity()).getMatrix();
         setRetainInstance(true);
         initGame();
+        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+        mSoundX = mSoundPool.load(getActivity(), R.raw.sergenious_movex, 1);
+        mSoundO = mSoundPool.load(getActivity(), R.raw.sergenious_moveo, 1);
+        mSoundMiss = mSoundPool.load(getActivity(), R.raw.erkanozan_miss, 1);
+        mSoundRewind = mSoundPool.load(getActivity(), R.raw.joanne_rewind, 1);
         // logic variables initialize
         // progress dialog, async task
         // async task - 9 letter array, jumbled
@@ -153,7 +160,8 @@ public class ScroggleGameFragment extends Fragment {
                         System.out.println("temp : "+temp);
                         if(temp==-1 || isNeighbor(fLarge1, temp) ){
                             phaseTwoString += ((Button) outer_two).getText().toString();
-                            if(GlobDict.getInstance(getActivity()).search(phaseTwoString) && !hs.contains(phaseTwoString)) {
+                            System.out.println(phaseTwoString);
+                            if(phaseTwoString.length()>2 && GlobDict.getInstance(getActivity()).search(phaseTwoString) && !hs.contains(phaseTwoString)) {
                                 //updateScore1(phaseTwoString.length());
                                 System.out.println(phaseTwoString);
                                 hs.add(phaseTwoString);
@@ -189,43 +197,62 @@ public class ScroggleGameFragment extends Fragment {
 
                         if(inner.getBackground().getLevel()==1)
                         {
-                            if(positionMemory[fLarge].get(positionMemory[fLarge].size()-1) == fSmall){
-                            //if(words[fLarge].substring(words[fLarge].length()-1).equals(inner.getText().toString())){
+                            if(isTransition) {
                                 smallTile.animate();
+                                System.out.println("is transition");
                                 smallTile.getView().getBackground().setLevel(0);
-                                words[fLarge] = words[fLarge].substring(0, words[fLarge].length()-1);
-                                positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
-                                if(GlobDict.getInstance(getActivity()).search(words[fLarge])) {
-                                    System.out.println(words[fLarge]);
-                                    ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
-                                }
-                                else{
-                                    ((ScroggleGameActivity) getActivity()).displayword("");
-                                }
-                                updateScore();
                             }
                             else{
-                                if(GlobDict.getInstance(getActivity()).search(words[fLarge]))
-                                ((ScroggleGameActivity)getActivity()).displayword(words[fLarge]);
-                                //Toast.makeText(getActivity(), "Cannot delete mid letter", Toast.LENGTH_SHORT);
+
+                                // remove letter from word
+                                if (positionMemory[fLarge].get(positionMemory[fLarge].size() - 1) == fSmall) {
+                                    //if(words[fLarge].substring(words[fLarge].length()-1).equals(inner.getText().toString())){
+                                    smallTile.animate();
+                                    smallTile.getView().getBackground().setLevel(0);
+                                    words[fLarge] = words[fLarge].substring(0, words[fLarge].length() - 1);
+                                    positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
+                                    if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
+                                        System.out.println(words[fLarge]);
+                                        ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                    } else {
+                                        ((ScroggleGameActivity) getActivity()).displayword("");
+                                    }
+                                    updateScore(5);
+                                } else {
+                                    if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge]))
+                                        ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                    //Toast.makeText(getActivity(), "Cannot delete mid letter", Toast.LENGTH_SHORT);
+                                }
                             }
                         }
                         else {
+                            // add letter to word
 
-                            if(positionMemory[fLarge].isEmpty() || isNeighbor(fSmall, positionMemory[fLarge].get(positionMemory[fLarge].size()-1))) {
+                            if(isTransition){
                                 smallTile.animate();
-                                // ...
+                                System.out.println("is transition");
                                 smallTile.getView().getBackground().setLevel(1);
-                                words[fLarge] = words[fLarge] + inner.getText().toString();
-                                positionMemory[fLarge].add(fSmall);
-                                if(GlobDict.getInstance(getActivity()).search(words[fLarge])) {
-                                    System.out.println(words[fLarge]);
-                                    ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                            }
+                            else {
+                                if (positionMemory[fLarge].isEmpty() || isNeighbor(fSmall, positionMemory[fLarge].get(positionMemory[fLarge].size() - 1))) {
+                                    smallTile.animate();
+                                    mSoundPool.play(mSoundO, mVolume, mVolume, 1, 0, 1f);
+                                    // ...
+                                    smallTile.getView().getBackground().setLevel(1);
+                                    words[fLarge] = words[fLarge] + inner.getText().toString();
+                                    positionMemory[fLarge].add(fSmall);
+                                    if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
+                                        System.out.println(words[fLarge]);
+                                        ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                    } else {
+                                        ((ScroggleGameActivity) getActivity()).displayword("");
+                                    }
+                                    updateScore(5);
                                 }
-                                else{
-                                    ((ScroggleGameActivity) getActivity()).displayword("");
+                                else
+                                {
+                                    mSoundPool.play(mSoundMiss, mVolume, mVolume, 1, 0, 1f);
                                 }
-                                updateScore();
                             }
                         }
 
@@ -240,10 +267,13 @@ public class ScroggleGameFragment extends Fragment {
 
     public void updateUIForTransitionPhase()
     {
+        boolean b = true;
+        isTransition = true;
         for (int large = 0; large < 9; large++) {
+            b = GlobDict.getInstance(getActivity()).search(words[large]);
             for (int small = 0; small < 9; small++) {
 
-                if(mSmallTiles[large][small].getView().getBackground().getLevel()==1)
+                if(b && mSmallTiles[large][small].getView().getBackground().getLevel()==1)
                 {
                     mSmallTiles[large][small].getView().getBackground().setLevel(0);
 
@@ -289,23 +319,31 @@ public class ScroggleGameFragment extends Fragment {
     }
 
 
-    public void updateScore(){
+    public void updateScore(int factor){
         int newScore = 0;
         for(int i=0; i<9; i++){
             String s = words[i];
+            System.out.print("HEYEYE : "+ s+" , ");
 
-            if(s.length()>2 && GlobDict.getInstance(getActivity()).search(s))
-            newScore+=s.length();
+            if(s.length()>2 && GlobDict.getInstance(getActivity()).search(s)) {
+                newScore += (s.length() * factor);
+                System.out.println("score factor: "+(s.length() * factor)+", word in dic");
+            }
+            else{
+                System.out.println();
+            }
         }
-        ((ScroggleGameActivity) getActivity()).updateScore(newScore);
         score = newScore;
-        System.out.println("new Score : "+newScore);
+
+        ((ScroggleGameActivity) getActivity()).setScore(score);
+
+        System.out.println("new Score : "+score);
     }
 
 
     public void updateScore1(int newScore){
         score += newScore;
-        ((ScroggleGameActivity) getActivity()).updateScore(score);
+        ((ScroggleGameActivity) getActivity()).setScore(score);
         System.out.println("new Score : "+score);
     }
 
@@ -316,6 +354,14 @@ public class ScroggleGameFragment extends Fragment {
             mPhaseTwoTiles[temp].getView().getBackground().setLevel(0);
         }
         temp = -1;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public void setScore(int a){
+        score = a;
     }
 
 }
