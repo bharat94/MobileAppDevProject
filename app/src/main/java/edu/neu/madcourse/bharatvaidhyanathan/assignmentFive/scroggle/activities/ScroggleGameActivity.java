@@ -220,6 +220,4 @@ public class ScroggleGameActivity extends Activity {
       builder1.show();
    }
 
-
-
 }
