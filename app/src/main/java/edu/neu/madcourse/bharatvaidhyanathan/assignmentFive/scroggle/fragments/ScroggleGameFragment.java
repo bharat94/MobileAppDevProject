@@ -34,9 +34,13 @@ import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.TileScrobbl
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.Tile;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.Dictionary;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.GlobDict;
 
 public class ScroggleGameFragment extends Fragment {
 
+    static int score;
+    static int temp = -1;
     static private int mLargeIds[] = {R.id.large1, R.id.large2, R.id.large3,
             R.id.large4, R.id.large5, R.id.large6, R.id.large7, R.id.large8,
             R.id.large9,};
@@ -57,6 +61,9 @@ public class ScroggleGameFragment extends Fragment {
     private char[][] charr;
     private ArrayList<Character> transitionCharacters;
     private ArrayList<Integer>[] positionMemory = (ArrayList<Integer>[]) new ArrayList[9];
+    private HashSet<String> hs = new HashSet<String>();
+    private String phaseTwoString = "";
+    private ArrayList<Integer> phaseTwoPositionMemory = new ArrayList<>();
 
 
 
@@ -118,13 +125,54 @@ public class ScroggleGameFragment extends Fragment {
     private void initViews(View rootView) {
         mEntireBoard.setView(rootView);
         for (int large = 0; large < 9; large++) {
+            final int fLarge1 = large;
             View outer = rootView.findViewById(mLargeIds[large]);
             mLargeTiles[large].setView(outer);
 
             //phase 2 code start
-            View outer_two = rootView.findViewById(phaseTwoIds[large]);
+            final View outer_two = rootView.findViewById(phaseTwoIds[large]);
             mPhaseTwoTiles[large].setView(outer_two);
+            outer_two.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    if(outer_two.getBackground().getLevel()==1)
+                    {
+//                        //remove letter
+//                        if(fLarge1 == phaseTwoPositionMemory.get(phaseTwoPositionMemory.size()-1)){
+//                            phaseTwoString = phaseTwoString.substring(0,phaseTwoString.length()-1);
+//                            ((ScroggleGameActivity) getActivity()).displayword(phaseTwoString);
+//                            phaseTwoPositionMemory.remove(phaseTwoPositionMemory.size()-1);
+//                            outer_two.getBackground().setLevel(0);
+//                        }
+                    }
+                    else {
+                        //add letter
+
+                        System.out.println("temp : "+temp);
+                        if(temp==-1 || isNeighbor(fLarge1, temp) ){
+                            phaseTwoString += ((Button) outer_two).getText().toString();
+                            if(GlobDict.getInstance(getActivity()).search(phaseTwoString) && !hs.contains(phaseTwoString)) {
+                                //updateScore1(phaseTwoString.length());
+                                System.out.println(phaseTwoString);
+                                hs.add(phaseTwoString);
+                            }
+                            ((ScroggleGameActivity) getActivity()).displayword(phaseTwoString);
+                            outer_two.getBackground().setLevel(1);
+
+                            if(temp!=-1) {
+                                mPhaseTwoTiles[temp].getView().getBackground().setLevel(0);
+                            }
+                            temp = fLarge1;
+
+                        }
+                    }
+                }
+            });
+
             //phase 2 code end
+
 
             for (int small = 0; small < 9; small++) {
                 final Button inner = (Button) outer.findViewById
@@ -141,16 +189,25 @@ public class ScroggleGameFragment extends Fragment {
 
                         if(inner.getBackground().getLevel()==1)
                         {
-                            if(words[fLarge].substring(words[fLarge].length()-1).equals(inner.getText().toString())){
+                            if(positionMemory[fLarge].get(positionMemory[fLarge].size()-1) == fSmall){
+                            //if(words[fLarge].substring(words[fLarge].length()-1).equals(inner.getText().toString())){
                                 smallTile.animate();
                                 smallTile.getView().getBackground().setLevel(0);
                                 words[fLarge] = words[fLarge].substring(0, words[fLarge].length()-1);
                                 positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
-                                ((ScroggleGameActivity)getActivity()).displayword(words[fLarge]);
+                                if(GlobDict.getInstance(getActivity()).search(words[fLarge])) {
+                                    System.out.println(words[fLarge]);
+                                    ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                }
+                                else{
+                                    ((ScroggleGameActivity) getActivity()).displayword("");
+                                }
+                                updateScore();
                             }
                             else{
+                                if(GlobDict.getInstance(getActivity()).search(words[fLarge]))
                                 ((ScroggleGameActivity)getActivity()).displayword(words[fLarge]);
-                                Toast.makeText(getActivity(), "Cannot delete mid letter", Toast.LENGTH_SHORT);
+                                //Toast.makeText(getActivity(), "Cannot delete mid letter", Toast.LENGTH_SHORT);
                             }
                         }
                         else {
@@ -161,7 +218,14 @@ public class ScroggleGameFragment extends Fragment {
                                 smallTile.getView().getBackground().setLevel(1);
                                 words[fLarge] = words[fLarge] + inner.getText().toString();
                                 positionMemory[fLarge].add(fSmall);
-                                ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                if(GlobDict.getInstance(getActivity()).search(words[fLarge])) {
+                                    System.out.println(words[fLarge]);
+                                    ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                }
+                                else{
+                                    ((ScroggleGameActivity) getActivity()).displayword("");
+                                }
+                                updateScore();
                             }
                         }
 
@@ -224,6 +288,35 @@ public class ScroggleGameFragment extends Fragment {
         return (Math.abs(r1 - r2) <= 1 && Math.abs(c1 - c2) <= 1);
     }
 
+
+    public void updateScore(){
+        int newScore = 0;
+        for(int i=0; i<9; i++){
+            String s = words[i];
+
+            if(s.length()>2 && GlobDict.getInstance(getActivity()).search(s))
+            newScore+=s.length();
+        }
+        ((ScroggleGameActivity) getActivity()).updateScore(newScore);
+        score = newScore;
+        System.out.println("new Score : "+newScore);
+    }
+
+
+    public void updateScore1(int newScore){
+        score += newScore;
+        ((ScroggleGameActivity) getActivity()).updateScore(score);
+        System.out.println("new Score : "+score);
+    }
+
+    public void resetBoard(){
+        ((ScroggleGameActivity) getActivity()).displayword("");
+        phaseTwoString = "";
+        if(temp!=-1) {
+            mPhaseTwoTiles[temp].getView().getBackground().setLevel(0);
+        }
+        temp = -1;
+    }
 
 }
 

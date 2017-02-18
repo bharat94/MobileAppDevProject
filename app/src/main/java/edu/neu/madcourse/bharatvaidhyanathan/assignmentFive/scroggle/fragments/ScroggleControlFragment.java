@@ -22,12 +22,12 @@ import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.
 public class ScroggleControlFragment extends Fragment {
 
    public View rootView;
-   public boolean isOnClickChanged;
+   public int donePhase;
 
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
-      isOnClickChanged = false;
+      donePhase = 0;
       rootView =
             inflater.inflate(R.layout.fragment_scroggle_control, container, false);
       View main = rootView.findViewById(R.id.button_main);
@@ -52,23 +52,29 @@ public class ScroggleControlFragment extends Fragment {
       done.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            if(!isOnClickChanged) {
-               ((ScroggleGameActivity) getActivity()).proceedToPhase2();
-               isOnClickChanged = true;
-            }
-            else{
-               //Toast.makeText(getActivity(), "Nothing Next", Toast.LENGTH_SHORT).show();
-               ((ScroggleGameActivity) getActivity()).initializePhase2();
+            switch (donePhase) {
+               case 0:
+                  ((ScroggleGameActivity) getActivity()).proceedToPhase2();
+                  donePhase = 1;
+                  break;
+               case 1:
+                  ((ScroggleGameActivity) getActivity()).initializePhase2();
+                  break;
+               case 2:
+                  ((ScroggleGameActivity) getActivity()).computeBoggleScore();
+                  break;
+               default:
+                  break;
             }
          }
       });
 
       return rootView;
-   }
+}
 
 
-   public void changeDoneButton(){
-      isOnClickChanged = true;
+   public void setDonePhase(int a){
+      donePhase = a;
    }
 
 }

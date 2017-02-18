@@ -17,14 +17,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashSet;
+
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.activities.GameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.GlobDict;
 
 public class ScroggleTimerFragment extends Fragment {
    boolean b;
 
+    private int score;
    private TextView mWordText;
+   private TextView mScoreText;
+    private HashSet<String> hs = new HashSet<>();
+
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState) {
@@ -33,6 +40,7 @@ public class ScroggleTimerFragment extends Fragment {
             inflater.inflate(R.layout.fragment_scroggle_timer, container, false);
       final TextView timer = (TextView) rootView.findViewById(R.id.timer_tv);
       mWordText = (TextView) rootView.findViewById(R.id.word);
+      mScoreText = (TextView) rootView.findViewById(R.id.text_view_score);
       CountDownTimer ct = new CountDownTimer(40000,1000) {
          @Override
          public void onTick(long l) {
@@ -61,8 +69,24 @@ public class ScroggleTimerFragment extends Fragment {
       mWordText.setText(word.toUpperCase());
    }
 
+   public void updateScore(int score)
+   {
+      mScoreText.setText(String.valueOf(score));
+   }
+
    public void setTimerDone(){
       b = true;
    }
+
+    public void recomputeScore(){
+        String s = mWordText.getText().toString();
+        if(!hs.contains(s) && GlobDict.getInstance(getActivity()).search(s)){
+            int a = Integer.parseInt(mScoreText.getText().toString());
+            a+=s.length();
+            mScoreText.setText(a+"");
+            score = a;
+            hs.add(s);
+        }
+    }
 
 }

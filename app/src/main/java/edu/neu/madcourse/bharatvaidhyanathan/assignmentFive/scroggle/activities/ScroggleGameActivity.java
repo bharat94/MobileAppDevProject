@@ -60,6 +60,11 @@ public class ScroggleGameActivity extends Activity {
       mTimerFragment.displayWord(word);
    }
 
+   public void updateScore(int score)
+   {
+      mTimerFragment.updateScore(score);
+   }
+
    @Override
    protected void onPause() {
       super.onPause();
@@ -82,7 +87,7 @@ public class ScroggleGameActivity extends Activity {
                  public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                     ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).updateUIForTransitionPhase();
-                    ((ScroggleControlFragment) getFragmentManager().findFragmentById(R.id.fragment_game_controls)).changeDoneButton();
+                    ((ScroggleControlFragment) getFragmentManager().findFragmentById(R.id.fragment_game_controls)).setDonePhase(1);
                     ((ScroggleTimerFragment) getFragmentManager().findFragmentById(R.id.fragment_timer)).setTimerDone();
                  }
               });
@@ -103,11 +108,23 @@ public class ScroggleGameActivity extends Activity {
 
                     ((GridLayout)findViewById(R.id.phase1)).setVisibility(View.GONE);
                     ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).updateUIForPhaseTwo();
+                    ((ScroggleControlFragment) getFragmentManager().findFragmentById(R.id.fragment_game_controls)).setDonePhase(2);
                     ((GridLayout)findViewById(R.id.phase2)).setVisibility(View.VISIBLE);
 
                  }
               });
       builder1.show();
+   }
+
+   public void computeBoggleScore(){
+
+      ((ScroggleTimerFragment) getFragmentManager().findFragmentById(R.id.fragment_timer)).recomputeScore();
+      System.out.println("Reset");
+      resetBoard();
+   }
+
+   public void resetBoard(){
+      ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).resetBoard();
    }
 
 }
