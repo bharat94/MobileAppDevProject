@@ -22,6 +22,7 @@
     <string name="about_label">About</string>
     <string name="ok_label">OK</string>
     <string name="search_hint">Enter Search Here</string>
+    <string name="SERVER_KEY">AAAAah3rOSw:APA91bHgST1osJaZru9lXAy8xGT5mclUeLJkm35qKuiYzUw7KAmihGh16MhNmuLg7DXdqlBpavGimZ0KmTF2dWbMBwQBmC5n2dugmgXoD09tuawr2NCyRJuoS-SzwClj7-RtWWq481Oc</string>
 
     <string name="ack_text">\
         <b>Logic : </b>\n
