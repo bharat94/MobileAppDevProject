@@ -8,9 +8,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import org.json.JSONObject;
 
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.AboutMeActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.CommunicationActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.DictObj;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,6 +101,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // Communication Button
+        final Button b6 = (Button) findViewById(R.id.button6);
+        b6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent i = new Intent(MainActivity.this, ScroggleMainActivity.class);
+                //progress = ProgressDialog.show(MainActivity.this, "Loading", "Loading the Word Game...", true, false);
+                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.CommunicationActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         //Quit button
         final Button bq = (Button) findViewById(R.id.buttonQuit);
         bq.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             DictObj.getInstance();
-            //Thread.sleep(time);
+            //Thread.sleep(4000);
             handler.sendEmptyMessage(0);
         }
 
@@ -131,5 +155,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
+
+
+
 
 }
