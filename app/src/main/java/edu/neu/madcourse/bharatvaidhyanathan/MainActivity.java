@@ -114,6 +114,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //Test Button
+        final Button b_test = (Button) findViewById(R.id.buttonTest);
+        b_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.TestActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         //Quit button
         final Button bq = (Button) findViewById(R.id.buttonQuit);
         bq.setOnClickListener(new View.OnClickListener() {

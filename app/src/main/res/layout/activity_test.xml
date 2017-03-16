@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".assignmentSeven.TestActivity">
+
+    <fragment
+        android:id="@+id/fragment_game"
+        class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleGameFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.71"
+        tools:layout="@layout/fragment_scroggle_game"/>
+
+</LinearLayout>
+

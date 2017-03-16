@@ -41,6 +41,9 @@ public class WordGameInstanceIDService extends FirebaseInstanceIdService {
         // Instance ID token to your app server.
         sendRegistrationToServer(refreshedToken);
     }
+
+
+
     // [END refresh_token]
 
     /**

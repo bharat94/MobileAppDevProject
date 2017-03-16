@@ -1,33 +1,27 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
-import android.os.PersistableBundle;
-import android.support.annotation.UiThread;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.OnDisconnect;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -45,9 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import edu.neu.madcourse.bharatvaidhyanathan.MainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.R;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.DictObj;
 
 public class CommunicationActivity extends AppCompatActivity {
 
@@ -62,12 +54,17 @@ public class CommunicationActivity extends AppCompatActivity {
     private List<String> listData;
     private ArrayAdapter<String> adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_communication);
 
+        FireBaseRegistrationThread regThread = new FireBaseRegistrationThread();
+        regThread.execute();
+
         logToken();
+
 
         final EditText editText_username = (EditText) findViewById(R.id.editTextUsername);
         final EditText editText_emailId = (EditText) findViewById(R.id.editTextEmailID);
@@ -212,6 +209,11 @@ public class CommunicationActivity extends AppCompatActivity {
     }
 
 
+    private String getToken(){
+        return FirebaseInstanceId.getInstance().getToken();
+    }
+
+
 
 
     private class NetworkThread extends AsyncTask {
@@ -344,7 +346,86 @@ public class CommunicationActivity extends AppCompatActivity {
     }
 
 
+    public class FireBaseRegistrationThread extends AsyncTask<Object, Object, Void> {
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //pd.show();
+            //System.out.println("Showing on preexec");
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //pd.dismiss();
+        }
+
+        @Override
+        protected Void doInBackground(Object... objects) {
+            final String token = FirebaseInstanceId.getInstance().getToken();
+            final DatabaseReference dRef = FirebaseDatabase.getInstance().getReference();
+
+
+            System.out.println(token);
+
+
+
+
+            dRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        if(ds.child("regID").getValue(String.class).equals(token)){
+                            Toast.makeText(CommunicationActivity.this, "Hello, "+ds.child("name").getValue(String.class)+"!", Toast.LENGTH_SHORT).show();
+                            switch_phase();
+                            break;
+                        }
+                    }
+                    System.out.println("dismissing after regID search");
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    //Toast.makeText(CommunicationActivity.this, "Unable to connect to the internet", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            // populating the array list
+            dRef.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        listData.add(ds.child("name").getValue(String.class));
+                    }
+
+                    adapter.notifyDataSetChanged();
+                }
+
+
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+            return null;
+        }
+
+
+    }
+
+
+
     public void switch_phase(){
+
         LinearLayout ll1 = (LinearLayout) findViewById(R.id.linear_layout_register);
         LinearLayout ll2 = (LinearLayout) findViewById(R.id.linear_layout_registered);
         if(ll1.getVisibility() == View.VISIBLE)
@@ -356,6 +437,4 @@ public class CommunicationActivity extends AppCompatActivity {
         else
             ll2.setVisibility(View.VISIBLE);
     }
-
-
 }
