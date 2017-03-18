@@ -54,9 +54,13 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".assignmentSeven.CommunicationActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".assignmentSeven.TestActivity" />
+        <activity android:name=".assignmentSeven.multiplayerScroggle.CommunicationActivity"
+            android:screenOrientation="portrait"
+            android:label="Communication"
+            />
+        <activity android:name=".assignmentSeven.multiplayerScroggle.FCMActivity"
+            android:screenOrientation="portrait"
+            android:label="Communication"/>
     </application>
 
 </manifest>

@@ -40,6 +40,25 @@ public class MainGameFragment extends Fragment {
             }
         });
 
+        Button b_ack = (Button) view.findViewById(R.id.a7_bt_ack);
+        b_ack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+
+                // 2. Chain together various setter methods to set the dialog characteristics
+                builder.setMessage(R.string.a7_ack_text)
+                        .setTitle("Acknowledgements");
+                // 3. Get the AlertDialog from create()
+                final android.support.v7.app.AlertDialog dialog = builder.create();
+
+                //setting the title
+                builder.setTitle("Multiplayer Scroggle");
+                dialog.show();
+            }
+        });
+
+
 
         return view;
     }

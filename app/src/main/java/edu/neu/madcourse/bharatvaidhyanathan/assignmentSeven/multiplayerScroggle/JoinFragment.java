@@ -1,6 +1,7 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -60,9 +61,6 @@ public class JoinFragment extends Fragment {
                 Toast.makeText(getActivity(),
                         "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
                         .show();
-
-
-
             }
 
         });
@@ -70,7 +68,7 @@ public class JoinFragment extends Fragment {
         populateGames();
         return  view;
     }
-    private void onGameJoined(DatabaseReference postRef, String gameId) {
+    private void onGameJoined(DatabaseReference postRef, final String gameId) {
         postRef
                 .child("games")
                 .child(gameId)
@@ -83,7 +81,7 @@ public class JoinFragment extends Fragment {
                         }
 
                         g.setJoined(true);
-                        g.setPlayer2(((CommunicationActivity)getActivity()).email);
+                        g.setPlayer2(((CommunicationActivity)getActivity()).userName);
                         mutableData.setValue(g);
                         return Transaction.success(mutableData);
                     }
@@ -93,7 +91,10 @@ public class JoinFragment extends Fragment {
                                            DataSnapshot dataSnapshot) {
                         // Transaction completed
                         //Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-                        ((CommunicationActivity)getActivity()).replaceFragment(new MainGameFragment(), Constants.GAME_SELECTION_FRAGMENT_TAG);
+                        Constants.GameID=gameId;
+                        ((CommunicationActivity)getActivity()).finish();
+                        Intent i = new Intent(getActivity(),FCMActivity.class);
+                        startActivity(i);
                     }
                 });
     }
@@ -104,13 +105,12 @@ public class JoinFragment extends Fragment {
         mDatabase.child("games").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> dataSnap  = dataSnapshot.getChildren();
-                for (DataSnapshot key : dataSnap)
+                for (DataSnapshot key : dataSnapshot.getChildren())
                 {
-
-                    if(key.getValue(Game.class).isHosted())
+                    if(key.getValue(Game.class).isHosted()){
                         mGames.add(key.getValue(Game.class));
-                        mGameNames.add(key.getValue(Game.class).getPlayer1());
+                        mGameNames.add(key.getValue(Game.class).getPlayer1() + "'s game");
+                    }
                 }
 
                 mGamaesAdapter = new ArrayAdapter<String>(getActivity(),

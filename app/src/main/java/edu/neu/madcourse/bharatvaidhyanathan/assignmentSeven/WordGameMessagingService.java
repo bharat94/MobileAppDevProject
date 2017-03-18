@@ -14,6 +14,8 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.CommunicationActivity;
+
 /**
  * Created by vaidhyanathannarayanan on 24/02/17.
  */
@@ -75,7 +77,7 @@ public class WordGameMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("FCM Message")
+                .setContentTitle("NUMAD - Scroggle")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

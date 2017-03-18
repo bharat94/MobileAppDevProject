@@ -1,7 +1,10 @@
 package edu.neu.madcourse.bharatvaidhyanathan;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -10,18 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-
-import org.json.JSONObject;
-
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.AboutMeActivity;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.CommunicationActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.CommunicationActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.DictObj;
 
 public class MainActivity extends AppCompatActivity {
@@ -106,23 +100,18 @@ public class MainActivity extends AppCompatActivity {
         b6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(MainActivity.this, ScroggleMainActivity.class);
-                //progress = ProgressDialog.show(MainActivity.this, "Loading", "Loading the Word Game...", true, false);
-                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.CommunicationActivity.class);
-                startActivity(i);
+                //Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.CommunicationActivity.class);
+                //startActivity(i);
+                if(isNetworkAvailable()) {
+                    Intent i = new Intent(MainActivity.this, CommunicationActivity.class);
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Unable to connect to the internet", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
-
-        //Test Button
-        final Button b_test = (Button) findViewById(R.id.buttonTest);
-        b_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.TestActivity.class);
-                startActivity(i);
-            }
-        });
 
 
         //Quit button
@@ -165,6 +154,15 @@ public class MainActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         };
+    }
+
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 
