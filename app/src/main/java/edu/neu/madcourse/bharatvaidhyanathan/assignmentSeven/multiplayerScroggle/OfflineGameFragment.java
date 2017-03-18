@@ -90,8 +90,11 @@ public class OfflineGameFragment extends Fragment {
                 System.out.println("Entering user ds code");
                 for (DataSnapshot key : dataSnapshot.getChildren())
                 {
-                    usersList.add(key.getValue(User.class));
-                    userNamesList.add(key.getValue(User.class).getName());
+                    User loopUser = key.getValue(User.class);
+                    if(!loopUser.getName().equals(((CommunicationActivity) getActivity()).userName)) {
+                        usersList.add(loopUser);
+                        userNamesList.add(loopUser.getName());
+                    }
                 }
                 usersAdapter = new ArrayAdapter<String>(getActivity(),
                         android.R.layout.simple_list_item_1, android.R.id.text1, userNamesList);
