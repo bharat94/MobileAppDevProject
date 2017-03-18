@@ -13,31 +13,28 @@ import edu.neu.madcourse.bharatvaidhyanathan.R;
 
 public class OnlineGameFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.choose_game_fragment,container,false);
-        Button hostGame = (Button) view.findViewById(R.id.a7_live_game);
-        Button joinGame = (Button) view.findViewById(R.id.a7_offline_game);
-        hostGame.setText("Host Game");
+
+        View view = inflater.inflate(R.layout.online_game_fragment,container,false);
+
+        Button hostGame = (Button) view.findViewById(R.id.a7_bt_host_game);
         hostGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((CommunicationActivity) getActivity()).replaceFragment(new HostFragment(), Constants.HOST_GAME_FRAGMENT_TAG);
             }
         });
-        joinGame.setText("Join Game");
+
+        Button joinGame = (Button) view.findViewById(R.id.a7_bt_join_game);
         joinGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((CommunicationActivity) getActivity()).replaceFragment(new JoinFragment(), Constants.JOIN_GAME_FRAGMENT_TAG);
             }
         });
+
         return view;
     }
 }
