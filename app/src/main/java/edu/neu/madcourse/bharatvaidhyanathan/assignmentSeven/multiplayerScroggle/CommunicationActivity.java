@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,11 +36,9 @@ import java.util.Scanner;
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.User;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.fragments.GameSelectionFragment;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.fragments.UserDetailsFragment;
 
 
-public class CommunicationActivity extends Activity {
+public class CommunicationActivity extends AppCompatActivity {
 
     private static final String TAG = CommunicationActivity.class.getSimpleName();
 
@@ -45,15 +46,25 @@ public class CommunicationActivity extends Activity {
     private static final String SERVER_KEY = "key=AAAAah3rOSw:APA91bHgST1osJaZru9lXAy8xGT5mclUeLJkm35qKuiYzUw7KAmihGh16MhNmuLg7DXdqlBpavGimZ0KmTF2dWbMBwQBmC5n2dugmgXoD09tuawr2NCyRJuoS-SzwClj7-RtWWq481Oc";
 
     private DatabaseReference mDatabase;
+
     private ArrayList<User> mUsers = new ArrayList<User>();
+
     private ArrayList<String> mUserNames = new ArrayList<String>();
+
     private ArrayAdapter mUsersAdapter;
+
     private ListView userList;
+
     private int mContainerId = R.id.fragment_container_new;
+
     private FragmentTransaction fragmentTransaction;
+
     private FragmentManager fragmentManager =getFragmentManager();
+
     private String mCurrentFragment;
+
     public String userName;
+
     public String email;
 // ...
 
@@ -63,17 +74,20 @@ public class CommunicationActivity extends Activity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         setContentView(R.layout.communication_activity_new);
 
+
+        getSupportActionBar().setTitle("Communication");
+
         checkUser();
         if(userName==null || userName.equals("") ) {
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(mContainerId, new UserDetailsFragment(), Constants.USER_FRAGMENT_TAG);
+            fragmentTransaction.add(mContainerId, new PlayerRegistrationFragment(), Constants.USER_FRAGMENT_TAG);
             mCurrentFragment = Constants.USER_FRAGMENT_TAG;
             fragmentTransaction.commitAllowingStateLoss();
         }
         else
         {
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(mContainerId, new GameSelectionFragment(), Constants.GAME_SELECTION_FRAGMENT_TAG);
+            fragmentTransaction.add(mContainerId, new MainGameFragment(), Constants.GAME_SELECTION_FRAGMENT_TAG);
             mCurrentFragment = Constants.GAME_SELECTION_FRAGMENT_TAG;
             fragmentTransaction.commitAllowingStateLoss();
         }
@@ -138,8 +152,8 @@ public class CommunicationActivity extends Activity {
         JSONObject jPayload = new JSONObject();
         JSONObject jNotification = new JSONObject();
         try {
-            jNotification.put("title", "Google I/O 2016");
-            jNotification.put("body", "Firebase Cloud Messaging (App)");
+            jNotification.put("title", "You've been challenged for a game of Scroggle");
+            jNotification.put("body", "You've been challenged for a game of Scroggle");
             jNotification.put("sound", "default");
             jNotification.put("badge", "1");
             jNotification.put("click_action", "");
