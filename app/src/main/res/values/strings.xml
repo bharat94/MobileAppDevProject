@@ -24,6 +24,20 @@
     <string name="search_hint">Enter Search Here</string>
     <string name="SERVER_KEY">AAAAah3rOSw:APA91bHgST1osJaZru9lXAy8xGT5mclUeLJkm35qKuiYzUw7KAmihGh16MhNmuLg7DXdqlBpavGimZ0KmTF2dWbMBwQBmC5n2dugmgXoD09tuawr2NCyRJuoS-SzwClj7-RtWWq481Oc</string>
 
+    <string name="a7_ack_text">\
+        <b>Design : </b>\n
+        Thought of various models on how to sync data real time. Designed the Database accordingly. Used help from batchmates for methods on how to establish a synchronous connection and program flow (Host and Join)\n\n
+        <b>Connectivity : </b>\n
+        Used help from online computer science websites like stackoverflow and geeks for geeks for reading string from files\n\n
+
+        <b>Issues : </b>\n
+        StackOverflow for helping me solve a problem that I was facing when issues related to networking and connection detection\n\n
+
+        <b>Help from people : </b>\n
+        Vaibhav Shukla
+
+    </string>
+
     <string name="ack_text">\
         <b>Logic : </b>\n
         Used help from online computer science websites like stackoverflow and geeks for geeks for reading string from files\n\n
@@ -64,4 +78,6 @@
     both sides in the larger game.
     </string>
     <string name="title_activity_test_dictionary">TestDictionaryActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_live_game">LiveGame</string>
 </resources>
