@@ -9,15 +9,26 @@ public class User {
     String name;
     String emailID;
     String userID;
-    boolean isActive;
+    boolean active;
     String regID;
+    int gameID;
+    String score;
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
 
     public User(){
         name = "";
         emailID = "";
         userID = "";
-        isActive = false;
+        active = false;
         regID = "";
+        gameID = 0;
     }
 
 
@@ -38,11 +49,11 @@ public class User {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setEmailID(String emailID) {
@@ -59,5 +70,13 @@ public class User {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public int getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
     }
 }
