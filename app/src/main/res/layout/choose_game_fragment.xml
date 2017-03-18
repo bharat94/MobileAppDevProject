@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</RelativeLayout>
+
+    <TextView
+        android:text="Hello, "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:id="@+id/a7_player_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="100dp">
+
+        <Button
+            android:text="Play Live"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/a7_live_game" />
+
+        <Button
+            android:text="Play Offline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/a7_offline_game" />
+
+        <Button
+            android:text="Acknowledgements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/a7_bt_ack" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

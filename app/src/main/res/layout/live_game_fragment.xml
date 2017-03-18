@@ -3,15 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <TextView android:id="@+id/modify_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please select from the list of available hosted games:"
-        android:textSize="20sp"/>
+        android:text="Modified realtime value"
+        />
 
-    <ListView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/live_game_list"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/text_modify"
+        />
+
+    <Button
+        android:id="@+id/modify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
 </LinearLayout>

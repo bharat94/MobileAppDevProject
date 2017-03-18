@@ -3,15 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Please select from the list of available hosted games:"
-        android:textSize="20sp"/>
-
-    <ListView
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/fragment_container_new"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/live_game_list"/>
+        android:gravity="center"
+        android:layout_gravity="center"
+        />
+
 </LinearLayout>
