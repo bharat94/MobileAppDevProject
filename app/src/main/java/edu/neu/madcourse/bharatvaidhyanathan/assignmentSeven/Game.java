@@ -11,8 +11,8 @@ public class Game {
     int phase;
     String player1;
     String player2;
-    int score1;
-    int score2;
+    String score1;
+    String score2;
     int timeLeft;
     boolean joined;
     boolean hosted;
@@ -58,19 +58,19 @@ public class Game {
         this.player2 = player2;
     }
 
-    public int getScore1() {
+    public String getScore1() {
         return score1;
     }
 
-    public void setScore1(int score1) {
+    public void setScore1(String score1) {
         this.score1 = score1;
     }
 
-    public int getScore2() {
+    public String getScore2() {
         return score2;
     }
 
-    public void setScore2(int score2) {
+    public void setScore2(String score2) {
         this.score2 = score2;
     }
 
