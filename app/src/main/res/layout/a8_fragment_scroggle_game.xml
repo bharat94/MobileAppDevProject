@@ -1,0 +1,35 @@
+<!--
+ ! Excerpted from "Hello, Android",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material, 
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
+-->
+<LinearLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+   tools:context=".assignmentFive.scroggle.activities.ScroggleGameActivity">
+
+   <include
+       android:id="@+id/phase1"
+       android:visibility="visible"
+      layout="@layout/large_board_scroggle"
+      android:layout_width="wrap_content"
+       android:layout_weight="1"
+      android:layout_height="wrap_content"/>
+
+   <include
+       android:id="@+id/phase2"
+       layout="@layout/phase_two_small_board_scroggle"
+       android:layout_width="wrap_content"
+       android:layout_weight="1"
+       android:visibility="gone"
+       android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

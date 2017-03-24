@@ -1,0 +1,75 @@
+<!--
+ ! Excerpted from "Hello, Android",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material, 
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
+-->
+<LinearLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical"
+    android:gravity="center"
+   android:padding="@dimen/timer_padding"
+   >
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="0.6"
+       android:orientation="horizontal">
+
+   <TextView
+       android:id="@+id/timer_tv"
+       android:text="00:00"
+       android:layout_weight="0.5"
+       android:textStyle="bold"
+       android:fontFamily="sans-serif"
+       android:textColor="@android:color/black"
+       android:textSize="16sp"
+       android:gravity="center"
+       android:elevation="@dimen/elevation_low"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content" />
+
+      <TextView
+          android:id="@+id/text_view_score"
+          android:text="Score : 0"
+          android:layout_weight="0.5"
+          android:textStyle="bold"
+          android:fontFamily="sans-serif"
+          android:textColor="@android:color/black"
+          android:textSize="16sp"
+          android:gravity="center"
+          android:elevation="@dimen/elevation_low"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content" />
+
+   </LinearLayout>
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="0.4"
+       android:orientation="horizontal">
+
+   <TextView
+       android:id="@+id/word"
+       android:text=""
+       android:textStyle="bold"
+       android:fontFamily="sans-serif"
+       android:textColor="@android:color/black"
+       android:textSize="13sp"
+       android:gravity="center"
+       android:layout_weight="0.5"
+       android:elevation="@dimen/elevation_low"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content" />
+
+      </LinearLayout>
+
+</LinearLayout>

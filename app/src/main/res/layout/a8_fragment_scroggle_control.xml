@@ -1,0 +1,64 @@
+<!--
+ ! Excerpted from "Hello, Android",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material, 
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
+-->
+<LinearLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:orientation="horizontal"
+   android:padding="@dimen/control_padding"
+   tools:context=".assignmentOne.tictactoe.activities.GameActivity">
+
+   <Button
+       android:id="@+id/button_done"
+       android:layout_width="0dp"
+       android:layout_weight="0.25"
+       android:layout_height="wrap_content"
+       android:elevation="@dimen/elevation_low"
+       android:padding="3dp"
+       android:textSize="12sp"
+       android:layout_margin="2dp"
+       android:background="@android:color/holo_blue_dark"
+       android:text="@string/done_label"/>
+   <Button
+       android:layout_weight="0.25"
+       android:id="@+id/button_pause"
+       android:layout_width="0dp"
+       android:textSize="12sp"
+       android:layout_height="wrap_content"
+       android:elevation="@dimen/elevation_low"
+       android:layout_margin="2dp"
+       android:padding="3dp"
+       android:background="@android:color/holo_blue_dark"
+       android:text="Pause"/>
+   <Button
+       android:textSize="12sp"
+       android:id="@+id/button_mute"
+       android:layout_weight="0.25"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:elevation="@dimen/elevation_low"
+       android:padding="3dp"
+       android:layout_margin="2dp"
+       android:background="@android:color/holo_blue_dark"
+       android:text="@string/mute_label"/>
+
+
+   <Button
+       android:textSize="12sp"
+      android:id="@+id/button_main"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:elevation="@dimen/elevation_low"
+       android:layout_margin="2dp"
+       android:layout_weight="0.25"
+       android:padding="3dp"
+       android:background="@android:color/holo_blue_dark"
+      android:text="@string/main_menu_label"/>
+</LinearLayout>

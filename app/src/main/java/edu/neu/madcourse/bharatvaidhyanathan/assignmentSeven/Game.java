@@ -7,6 +7,7 @@ package edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven;
 public class Game {
 
     String board;
+    String selection;
     String gameID;
     int phase;
     String player1;
@@ -96,5 +97,13 @@ public class Game {
 
     public void setHosted(boolean hosted) {
         this.hosted = hosted;
+    }
+
+    public String getSelection() {
+        return selection;
+    }
+
+    public void setSelection(String selection) {
+        this.selection = selection;
     }
 }

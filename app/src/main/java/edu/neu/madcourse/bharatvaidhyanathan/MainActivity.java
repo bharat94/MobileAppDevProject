@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.MultiplayerScroggleActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.AboutMeActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.CommunicationActivity;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Word game - Scrobble Button
+        // Word game - Scroggle Button
         final Button b5 = (Button) findViewById(R.id.button5);
         b5.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +105,22 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(i);
                 if(isNetworkAvailable()) {
                     Intent i = new Intent(MainActivity.this, CommunicationActivity.class);
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Unable to connect to the internet", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        // Multiplayer Scroggle Button
+        final Button b7 = (Button) findViewById(R.id.button7);
+        b7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isNetworkAvailable()) {
+                    Intent i = new Intent(MainActivity.this, MultiplayerScroggleActivity.class);
                     startActivity(i);
                 }
                 else{

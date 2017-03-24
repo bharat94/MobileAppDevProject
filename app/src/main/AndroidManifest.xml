@@ -54,13 +54,24 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".assignmentSeven.multiplayerScroggle.CommunicationActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".assignmentSeven.multiplayerScroggle.CommunicationActivity"
             android:label="Communication"
-            />
-        <activity android:name=".assignmentSeven.multiplayerScroggle.FCMActivity"
-            android:screenOrientation="portrait"
-            android:label="Communication"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".assignmentSeven.multiplayerScroggle.FCMActivity"
+            android:label="Communication"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".assignmentEight.MultiplayerScroggleActivity"
+            android:label="Two Player Word Game"
+            android:screenOrientation="portrait" />
+        <activity android:name=".assignmentEight.gameFiles.scroggle.activities.ScroggleGameActivity" />
+        <activity android:name=".assignmentEight.gameFiles.scroggle.activities.ScroggleMainActivity" />
+        <activity android:name=".assignmentEight.multiplayerScroggle.FCMActivity" />
+
+
     </application>
 
 </manifest>
