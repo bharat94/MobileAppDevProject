@@ -33,13 +33,13 @@ public class ScroggleControlFragment extends Fragment {
       View main = rootView.findViewById(R.id.button_main);
       final View mute = rootView.findViewById(R.id.button_mute);
       View done = rootView.findViewById(R.id.button_done);
-      View pause = rootView.findViewById(R.id.button_pause);
-       pause.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               ((ScroggleGameActivity)getActivity()).pausetheGame();
-           }
-       });
+      //View pause = rootView.findViewById(R.id.button_pause);
+//       pause.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View view) {
+//               ((ScroggleGameActivity)getActivity()).pausetheGame();
+//           }
+//       });
       main.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
@@ -74,20 +74,7 @@ public class ScroggleControlFragment extends Fragment {
       done.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            switch (donePhase) {
-               case 0:
-                  ((ScroggleGameActivity) getActivity()).proceedToPhase2();
-                  donePhase = 1;
-                  break;
-               case 1:
-                  ((ScroggleGameActivity) getActivity()).initializePhase2();
-                  break;
-               case 2:
-                  ((ScroggleGameActivity) getActivity()).computeBoggleScore();
-                  break;
-               default:
-                  break;
-            }
+             ((ScroggleGameActivity) getActivity()).updateCurrentGrid();
          }
       });
 

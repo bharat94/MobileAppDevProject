@@ -42,6 +42,14 @@ public class MainGameFragment extends Fragment {
             }
         });
 
+        Button b_leaderboard = (Button) view.findViewById(R.id.a7_bt_lead);
+        b_leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MultiplayerScroggleActivity)getActivity()).replaceFragment(new LeaderBoardFragment(), Constants.LEADERBOARD_FRAGMENT_TAG);
+            }
+        });
+
         Button b_ack = (Button) view.findViewById(R.id.a7_bt_ack);
         b_ack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +68,7 @@ public class MainGameFragment extends Fragment {
             }
         });
 
-
+        ((MultiplayerScroggleActivity) getActivity()).getLocation();
 
         return view;
     }

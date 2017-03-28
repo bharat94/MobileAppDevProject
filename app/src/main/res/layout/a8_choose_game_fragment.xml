@@ -32,6 +32,12 @@
             android:id="@+id/a7_offline_game" />
 
         <Button
+            android:text="Leaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/a7_bt_lead" />
+
+        <Button
             android:text="Acknowledgements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

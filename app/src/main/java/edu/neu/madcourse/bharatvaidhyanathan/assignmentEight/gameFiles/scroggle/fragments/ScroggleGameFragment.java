@@ -167,7 +167,7 @@ public class ScroggleGameFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-
+                    System.out.println(fLarge1);
                     if(outer_two.getBackground().getLevel()==1)
                     {
 //                        //remove letter
@@ -228,24 +228,28 @@ public class ScroggleGameFragment extends Fragment {
                             }
                             else{
 
-                                // remove letter from word
-                                if (positionMemory[fLarge].get(positionMemory[fLarge].size() - 1) == fSmall) {
-                                    //if(words[fLarge].substring(words[fLarge].length()-1).equals(inner.getText().toString())){
-                                    smallTile.animate();
-                                    smallTile.getView().getBackground().setLevel(0);
-                                    words[fLarge] = words[fLarge].substring(0, words[fLarge].length() - 1);
-                                    positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
-                                    if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
-                                        //System.out.println(words[fLarge]);
-                                        ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                //adding code to restrict user to his grid only
+                                if(fLarge == Constants.CurrentGrid) {
+
+                                    // remove letter from word
+                                    if (positionMemory[fLarge].get(positionMemory[fLarge].size() - 1) == fSmall) {
+                                        //if(words[fLarge].substring(words[fLarge].length()-1).equals(inner.getText().toString())){
+                                        smallTile.animate();
+                                        smallTile.getView().getBackground().setLevel(0);
+                                        words[fLarge] = words[fLarge].substring(0, words[fLarge].length() - 1);
+                                        positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
+                                        if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
+                                            //System.out.println(words[fLarge]);
+                                            ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                        } else {
+                                            ((ScroggleGameActivity) getActivity()).displayword("");
+                                        }
+                                        updateScore(5);
                                     } else {
-                                        ((ScroggleGameActivity) getActivity()).displayword("");
+                                        if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge]))
+                                            ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                        //Toast.makeText(getActivity(), "Cannot delete mid letter", Toast.LENGTH_SHORT);
                                     }
-                                    updateScore(5);
-                                } else {
-                                    if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge]))
-                                        ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
-                                    //Toast.makeText(getActivity(), "Cannot delete mid letter", Toast.LENGTH_SHORT);
                                 }
                             }
                         }
@@ -258,24 +262,27 @@ public class ScroggleGameFragment extends Fragment {
                                 smallTile.getView().getBackground().setLevel(1);
                             }
                             else {
-                                if (positionMemory[fLarge].isEmpty() || isNeighbor(fSmall, positionMemory[fLarge].get(positionMemory[fLarge].size() - 1))) {
-                                    smallTile.animate();
-                                    mSoundPool.play(mSoundO, mVolume, mVolume, 1, 0, 1f);
-                                    // ...
-                                    smallTile.getView().getBackground().setLevel(1);
-                                    words[fLarge] = words[fLarge] + inner.getText().toString();
-                                    positionMemory[fLarge].add(fSmall);
-                                    if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
-                                        //System.out.println(words[fLarge]);
-                                        ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+
+                                //adding code to restrict user to his grid only
+                                if(fLarge == Constants.CurrentGrid) {
+
+                                    if (positionMemory[fLarge].isEmpty() || isNeighbor(fSmall, positionMemory[fLarge].get(positionMemory[fLarge].size() - 1))) {
+                                        smallTile.animate();
+                                        mSoundPool.play(mSoundO, mVolume, mVolume, 1, 0, 1f);
+                                        // ...
+                                        smallTile.getView().getBackground().setLevel(1);
+                                        words[fLarge] = words[fLarge] + inner.getText().toString();
+                                        positionMemory[fLarge].add(fSmall);
+                                        if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
+                                            //System.out.println(words[fLarge]);
+                                            ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
+                                        } else {
+                                            ((ScroggleGameActivity) getActivity()).displayword("");
+                                        }
+                                        updateScore(5);
                                     } else {
-                                        ((ScroggleGameActivity) getActivity()).displayword("");
+                                        mSoundPool.play(mSoundMiss, mVolume, mVolume, 1, 0, 1f);
                                     }
-                                    updateScore(5);
-                                }
-                                else
-                                {
-                                    mSoundPool.play(mSoundMiss, mVolume, mVolume, 1, 0, 1f);
                                 }
                             }
                         }

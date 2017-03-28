@@ -82,6 +82,7 @@ public class JoinFragment extends Fragment {
                             return Transaction.success(mutableData);
                         }
                         Constants.GameWords=g.getBoard();
+                        Constants.CurrentGrid = g.getPlayer2gridnumber();
                         g.setJoined(true);
                         g.setPlayer2(((MultiplayerScroggleActivity)getActivity()).userName);
                         mutableData.setValue(g);
@@ -100,6 +101,7 @@ public class JoinFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putBoolean("isHosted", false);
                         bundle.putString("words", Constants.GameWords);
+                        bundle.putInt("currentGrid", Constants.CurrentGrid);
                         i.putExtra("value", bundle);
                         startActivity(i);
                     }

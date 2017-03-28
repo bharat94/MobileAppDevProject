@@ -19,13 +19,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+
 import java.util.HashSet;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.MultiplayerScroggleActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggle.fragments.ScroggleControlFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggle.fragments.ScroggleGameFragment;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggle.fragments.ScroggleTimerFragment;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.multiplayerScroggle.Constants;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentOne.tictactoe.fragments.GameFragment;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.Game;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentThree.GlobDict;
 
 import static edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleMainActivity.MUSIC_ON;
@@ -222,5 +231,44 @@ public class ScroggleGameActivity extends Activity {
     public String getWords(){
         return this.words;
     }
+
+    public int getCurrentGrid(){
+       return Constants.CurrentGrid;
+    }
+
+   public void updateCurrentGrid(){
+         FirebaseDatabase.getInstance().getReference()
+                 .child("games")
+                 .child(Constants.GameID)
+                 .runTransaction(new Transaction.Handler() {
+                    @Override
+                    public Transaction.Result doTransaction(MutableData mutableData) {
+                       Game g = mutableData.getValue(Game.class);
+                       if (g == null) {
+                          return Transaction.success(mutableData);
+                       }
+                       String s = g.getGridNumbers();
+                       if(s.length()!=0 && s.charAt(0)!=','){
+                          int poscomma = s.indexOf(',');
+                          Constants.CurrentGrid = Integer.parseInt(s.substring(0,poscomma));
+                          g.setGridNumbers(s.substring(poscomma+1));
+                          mutableData.setValue(g);
+                       }
+                       else{
+                          System.out.println("Done with all numbers");
+                          Constants.CurrentGrid = -1;
+                       }
+                       return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, boolean b,
+                                           DataSnapshot dataSnapshot) {
+                       // Transaction completed
+                       //Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                    }
+                 });
+   }
+
 
 }

@@ -17,6 +17,9 @@ public class Game {
     int timeLeft;
     boolean joined;
     boolean hosted;
+    int player1gridnumber;
+    int player2gridnumber;
+    String gridNumbers;
 
 
     public String getBoard() {
@@ -105,5 +108,29 @@ public class Game {
 
     public void setSelection(String selection) {
         this.selection = selection;
+    }
+
+    public int getPlayer1gridnumber() {
+        return player1gridnumber;
+    }
+
+    public void setPlayer1gridnumber(int player1gridnumber) {
+        this.player1gridnumber = player1gridnumber;
+    }
+
+    public int getPlayer2gridnumber() {
+        return player2gridnumber;
+    }
+
+    public void setPlayer2gridnumber(int player2gridnumber) {
+        this.player2gridnumber = player2gridnumber;
+    }
+
+    public String getGridNumbers() {
+        return gridNumbers;
+    }
+
+    public void setGridNumbers(String gridNumbers) {
+        this.gridNumbers = gridNumbers;
     }
 }

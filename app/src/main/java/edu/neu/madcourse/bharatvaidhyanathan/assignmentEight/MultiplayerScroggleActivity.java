@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
+import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -208,7 +210,38 @@ public class MultiplayerScroggleActivity extends AppCompatActivity {
         return s.hasNext() ? s.next().replace(",", ",\n") : "";
     }
 
+    public void getLocation(){
+        (new LocationFetcher()).execute();
+    }
 
+}
 
+class LocationFetcher extends AsyncTask{
 
+    String currentCity = "";
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        Geocoder gcd = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = gcd.getFromLocation(lat, lng, 1);
+        if (addresses.size() > 0)
+        {
+            System.out.println(addresses.get(0).getLocality());
+        }
+        else
+        {
+            // do your staff
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Object o) {
+        super.onPostExecute(o);
+    }
 }

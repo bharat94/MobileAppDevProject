@@ -17,6 +17,11 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.MultiplayerScroggleActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.NineLetterDict;
@@ -48,6 +53,20 @@ public class HostFragment extends Fragment {
         mProgressDialog.setCancelable(true);
         mProgressDialog.show();
         String words = NineLetterDict.getInstance(getActivity()).getWordsAsString();
+
+        Integer arr[] = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
+        ArrayList<Integer> gridNos= new ArrayList<Integer>(Arrays.asList(arr));
+        Collections.shuffle(gridNos);
+
+        int a = gridNos.remove(0);
+        Constants.CurrentGrid = a;
+        int b = gridNos.remove(0);
+        String s = "";
+        for(int c : gridNos){
+            s+=c+",";
+        }
+        s.substring(0,s.length());
+
         game = new Game();
         game.setBoard(words);
         game.setSelection(Constants.DefaultSelection);
@@ -56,6 +75,11 @@ public class HostFragment extends Fragment {
         game.setScore2("0");
         game.setJoined(false);
         game.setHosted(true);
+
+        game.setPlayer1gridnumber(a);
+        game.setPlayer2gridnumber(b);
+        game.setGridNumbers(s);
+
         game.setGameID(mDatabase.child("games").push().getKey());
         mDatabase.child("games").child(game.getGameID()).setValue(game);
 
@@ -112,6 +136,7 @@ public class HostFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("isHosted", true);
                     bundle.putString("words", words);
+                    bundle.putInt("currentGrid", Constants.CurrentGrid);
                     i.putExtra("value", bundle);
                     startActivity(i);
                 }
