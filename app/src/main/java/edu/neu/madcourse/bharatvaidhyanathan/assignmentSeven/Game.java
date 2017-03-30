@@ -6,21 +6,33 @@ package edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven;
 
 public class Game {
 
-    String board;
-    String selection;
-    String gameID;
-    int phase;
-    String player1;
-    String player2;
-    String score1;
-    String score2;
-    int timeLeft;
-    boolean joined;
+    String board="";
+    String gameID="";
+    String gridNumbers="";
     boolean hosted;
+    boolean joined;
+    String move = "";
+    int phase=0;
+    String player1="";
+    String player2="";
     int player1gridnumber;
     int player2gridnumber;
-    String gridNumbers;
 
+    String score1="";
+    String score2="";
+
+    String selection="";
+
+    int timeLeft;
+    boolean playerDone;
+
+    public boolean getPlayerDone() {
+        return playerDone;
+    }
+
+    public void setPlayerDone(boolean playerDone) {
+        this.playerDone = playerDone;
+    }
 
     public String getBoard() {
         return board;
@@ -36,6 +48,38 @@ public class Game {
 
     public void setGameID(String gameID) {
         this.gameID = gameID;
+    }
+
+    public String getGridNumbers() {
+        return gridNumbers;
+    }
+
+    public void setGridNumbers(String gridNumbers) {
+        this.gridNumbers = gridNumbers;
+    }
+
+    public boolean getHosted() {
+        return hosted;
+    }
+
+    public void setHosted(boolean hosted) {
+        this.hosted = hosted;
+    }
+
+    public boolean getJoined() {
+        return joined;
+    }
+
+    public void setJoined(boolean joined) {
+        this.joined = joined;
+    }
+
+    public String getMove() {
+        return move;
+    }
+
+    public void setMove(String move) {
+        this.move = move;
     }
 
     public int getPhase() {
@@ -62,54 +106,6 @@ public class Game {
         this.player2 = player2;
     }
 
-    public String getScore1() {
-        return score1;
-    }
-
-    public void setScore1(String score1) {
-        this.score1 = score1;
-    }
-
-    public String getScore2() {
-        return score2;
-    }
-
-    public void setScore2(String score2) {
-        this.score2 = score2;
-    }
-
-    public int getTimeLeft() {
-        return timeLeft;
-    }
-
-    public void setTimeLeft(int timeLeft) {
-        this.timeLeft = timeLeft;
-    }
-
-    public boolean isJoined() {
-        return joined;
-    }
-
-    public void setJoined(boolean joined) {
-        this.joined = joined;
-    }
-
-    public boolean isHosted() {
-        return hosted;
-    }
-
-    public void setHosted(boolean hosted) {
-        this.hosted = hosted;
-    }
-
-    public String getSelection() {
-        return selection;
-    }
-
-    public void setSelection(String selection) {
-        this.selection = selection;
-    }
-
     public int getPlayer1gridnumber() {
         return player1gridnumber;
     }
@@ -126,11 +122,35 @@ public class Game {
         this.player2gridnumber = player2gridnumber;
     }
 
-    public String getGridNumbers() {
-        return gridNumbers;
+    public String getScore1() {
+        return score1;
     }
 
-    public void setGridNumbers(String gridNumbers) {
-        this.gridNumbers = gridNumbers;
+    public void setScore1(String score1) {
+        this.score1 = score1;
+    }
+
+    public String getScore2() {
+        return score2;
+    }
+
+    public void setScore2(String score2) {
+        this.score2 = score2;
+    }
+
+    public String getSelection() {
+        return selection;
+    }
+
+    public void setSelection(String selection) {
+        this.selection = selection;
+    }
+
+    public int getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(int timeLeft) {
+        this.timeLeft = timeLeft;
     }
 }

@@ -14,6 +14,8 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.activities.OfflineScroggleGameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.multiplayerScroggle.Constants;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.CommunicationActivity;
 
 /**
@@ -48,12 +50,13 @@ public class WordGameMessagingService extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            sendNotification(remoteMessage.getNotification());
         }
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-            sendNotification(remoteMessage.getNotification().getBody());
+            sendNotification(remoteMessage.getNotification());
         }
 
 
@@ -68,8 +71,22 @@ public class WordGameMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, CommunicationActivity.class);
+    private void sendNotification(RemoteMessage.Notification messageBody) {
+        System.out.println("SEND NOTIFICATION CALLED");
+        Intent intent;
+        if(messageBody.getClickAction().equals("OfflineGame"))
+             intent = new Intent(this, OfflineScroggleGameActivity.class);
+        else
+             intent = new Intent(this, CommunicationActivity.class);
+        System.out.println(messageBody.getBody());
+        String[] strarr = messageBody.getBody().toString().split("\\|");
+        String board = strarr[0];
+        String gameId = strarr[1];
+        System.out.println("BOARD : "+board);
+        System.out.println("GameID : "+gameId);
+        intent.putExtra(Constants.GAME_BOARD,board);
+        intent.putExtra(Constants.GAME_ID,gameId);
+        intent.putExtra("isHosted", false);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
@@ -77,8 +94,8 @@ public class WordGameMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("NUMAD - Scroggle")
-                .setContentText(messageBody)
+                .setContentTitle("Scroggle")
+                .setContentText("You have been challenged for a game of Scroggle!")
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);

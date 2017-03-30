@@ -13,6 +13,15 @@ public class User {
     String regID;
     int gameID;
     String score;
+    String country = "United States";
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     public String getScore() {
         return score;
