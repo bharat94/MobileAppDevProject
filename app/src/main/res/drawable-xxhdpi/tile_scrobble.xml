@@ -14,4 +14,7 @@
    <item
       android:drawable="@drawable/tile_selected"
       android:maxLevel="1" />
+   <item
+       android:drawable="@android:color/darker_gray"
+       android:maxLevel="2" />
 </level-list>
