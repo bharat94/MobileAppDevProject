@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.madcourse.bharatvaidhyanathan">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".assignmentThree.App"
@@ -67,10 +70,31 @@
             android:name=".assignmentEight.MultiplayerScroggleActivity"
             android:label="Two Player Word Game"
             android:screenOrientation="portrait" />
-        <activity android:name=".assignmentEight.gameFiles.scroggle.activities.ScroggleGameActivity" />
-        <activity android:name=".assignmentEight.gameFiles.scroggle.activities.ScroggleMainActivity" />
-        <activity android:name=".assignmentEight.multiplayerScroggle.FCMActivity" />
+        <activity android:name=".assignmentEight.gameFiles.scroggle.activities.ScroggleGameActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".assignmentEight.gameFiles.scroggle.activities.ScroggleMainActivity"
+            android:screenOrientation="portrait"/>
 
+        <activity android:name=".assignmentEight.gameFiles.scroggleOffline.activities.OfflineScroggleGameActivity"
+            android:label="OfflineGame"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".assignmentEight.gameFiles.scroggleOffline.activities.ScroggleMainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".assignmentEight.multiplayerScroggle.FCMActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".assignmentEight.LocationManagerActivity"
+            android:screenOrientation="portrait"/>
+
+
+        <receiver
+            android:name=".assignmentEight.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
