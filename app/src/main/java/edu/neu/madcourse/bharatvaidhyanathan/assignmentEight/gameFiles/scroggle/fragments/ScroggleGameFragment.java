@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -74,7 +75,8 @@ public class ScroggleGameFragment extends Fragment {
     private float mVolume = 1f;
 
     private TileScrobble mPhaseTwoTiles[] = new TileScrobble[9];
-
+    private String previousMove = "";
+    private boolean isMoveMaker = false;
 
     @Nullable
     @Override
@@ -82,7 +84,7 @@ public class ScroggleGameFragment extends Fragment {
         View v = inflater.inflate(R.layout.a8_fragment_scroggle_game, container, false);
 
         // would initialize views
-
+        waitForOtherPlayerMove(FirebaseDatabase.getInstance().getReference(),Constants.GameID);
         initViews(v);
         return v;
     }
@@ -162,6 +164,7 @@ public class ScroggleGameFragment extends Fragment {
 
             //phase 2 code start
             final View outer_two = rootView.findViewById(phaseTwoIds[large]);
+
             mPhaseTwoTiles[large].setView(outer_two);
             outer_two.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -214,6 +217,10 @@ public class ScroggleGameFragment extends Fragment {
                 final int fSmall = small;
                 final TileScrobble smallTile = mSmallTiles[large][small];
                 smallTile.setView(inner);
+
+                if(Constants.CurrentGrid != large && inner.getBackground().getLevel()!=1)
+                    inner.getBackground().setLevel(2);
+
                 // ...
                 inner.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -238,6 +245,7 @@ public class ScroggleGameFragment extends Fragment {
                                         smallTile.getView().getBackground().setLevel(0);
                                         words[fLarge] = words[fLarge].substring(0, words[fLarge].length() - 1);
                                         positionMemory[fLarge].remove(positionMemory[fLarge].size() - 1);
+                                        onMoveMade(FirebaseDatabase.getInstance().getReference(),Constants.GameID,fLarge,fSmall);
                                         if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
                                             //System.out.println(words[fLarge]);
                                             ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
@@ -273,6 +281,7 @@ public class ScroggleGameFragment extends Fragment {
                                         smallTile.getView().getBackground().setLevel(1);
                                         words[fLarge] = words[fLarge] + inner.getText().toString();
                                         positionMemory[fLarge].add(fSmall);
+                                        onMoveMade(FirebaseDatabase.getInstance().getReference(),Constants.GameID,fLarge,fSmall);
                                         if (words[fLarge].length() > 2 && GlobDict.getInstance(getActivity()).search(words[fLarge])) {
                                             //System.out.println(words[fLarge]);
                                             ((ScroggleGameActivity) getActivity()).displayword(words[fLarge]);
@@ -393,6 +402,75 @@ public class ScroggleGameFragment extends Fragment {
 
     public void setScore(int a){
         score = a;
+    }
+
+    private void onMoveMade(DatabaseReference postRef, final String gameId, final int large, final int small) {
+        System.out.println("mmmmmmmmmmmmmmm");
+        postRef
+                .child("games")
+                .child(gameId)
+                .runTransaction(new Transaction.Handler() {
+                    @Override
+                    public Transaction.Result doTransaction(MutableData mutableData) {
+                        Game g = mutableData.getValue(Game.class);
+                        if (g == null) {
+                            return Transaction.success(mutableData);
+                        }
+                        
+                        g.setMove(""+large+","+small);
+                        mutableData.setValue(g);
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, boolean b,
+                                           DataSnapshot dataSnapshot) {
+                        // Transaction completed
+
+                    }
+                });
+    }
+
+
+    public void waitForOtherPlayerMove(DatabaseReference databaseReference, String gameId) {
+        databaseReference.child("games").child(gameId).child("move").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String move = dataSnapshot.getValue(String.class);
+                if(!isMoveMaker) {
+                    if (move != null && !previousMove.equals(move)) {
+                        previousMove = move;
+                        String arr[] = (move).split(",");
+                        int large = Integer.parseInt(arr[0]);
+                        int small = Integer.parseInt(arr[1]);
+                         mSmallTiles[large][small].getView().getBackground().setLevel(1);
+                        //validateMove(large, small);
+                       // updateBoardSecondPlayer(large,small);
+                    }
+                }
+                else
+                    isMoveMaker = false;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    public void updateGameBoard() {
+        for (int large = 0; large < 9; large++) {
+            for (int small = 0; small < 9; small++) {
+
+                if (Constants.CurrentGrid == large)
+                    mSmallTiles[large][small].getView().getBackground().setLevel(0);
+                else
+                    if(mSmallTiles[large][small].getView().getBackground().getLevel()!=1)
+                    mSmallTiles[large][small].getView().getBackground().setLevel(2);
+            }
+        }
     }
 
 }

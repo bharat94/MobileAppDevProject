@@ -71,12 +71,24 @@ public class ScroggleControlFragment extends Fragment {
 
 
 
-      done.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             ((ScroggleGameActivity) getActivity()).updateCurrentGrid();
-         }
-      });
+       done.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               switch (donePhase) {
+                   case 0:
+                       ((ScroggleGameActivity) getActivity()).updateCurrentGrid();
+                       break;
+                   case 1:
+                       ((ScroggleGameActivity) getActivity()).initializePhase2();
+                       break;
+                   case 2:
+                       ((ScroggleGameActivity) getActivity()).computeBoggleScore();
+                       break;
+                   default:
+                       break;
+               }
+           }
+       });
 
       return rootView;
 }

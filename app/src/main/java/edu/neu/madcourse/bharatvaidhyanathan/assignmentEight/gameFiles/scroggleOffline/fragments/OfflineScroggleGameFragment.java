@@ -85,7 +85,7 @@ public class OfflineScroggleGameFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         NineLetterDict.getInstance(getActivity());
-        charr = NineLetterDict.getInstance(getActivity()).getMatrix();
+        charr = ((OfflineScroggleGameActivity) getActivity()).getWordsasMatrix();
         setRetainInstance(true);
         initGame();
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);

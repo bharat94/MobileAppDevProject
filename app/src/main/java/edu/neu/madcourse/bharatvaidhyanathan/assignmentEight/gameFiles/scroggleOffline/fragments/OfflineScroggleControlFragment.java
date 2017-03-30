@@ -43,8 +43,9 @@ public class OfflineScroggleControlFragment extends Fragment {
       main.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+             System.out.println("Button Quit clicked");
              ((OfflineScroggleGameActivity)getActivity()).goToThanksPhase();
-             ScroggleTimerFragment.ct.cancel();
+             OfflineScroggleTimerFragment.ct.cancel();
          }
       });
 

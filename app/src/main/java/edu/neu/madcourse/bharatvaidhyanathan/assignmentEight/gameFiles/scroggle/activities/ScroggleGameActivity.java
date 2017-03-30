@@ -52,13 +52,14 @@ public class ScroggleGameActivity extends Activity {
    private Button mResumeButton;
    HashSet<String> hs = new HashSet<>();
    private String words;
+   public boolean isHost;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
 
       words = this.getIntent().getExtras().getBundle("value").getString("words");
-
+      isHost = getIntent().getExtras().getBundle("value").getBoolean("isHosted",false);
       setContentView(R.layout.a8_activity_scroggle_game);
       mResumeButton = (Button) findViewById(R.id.resume);
       mGameView = findViewById(R.id.game_layout);
@@ -139,8 +140,37 @@ public class ScroggleGameActivity extends Activity {
    }
 
 
-
    public void proceedToPhase2()
+   {
+      int score1 = ((ScroggleTimerFragment) getFragmentManager().findFragmentById(R.id.fragment_timer)).score;
+      int score2 = ((ScroggleTimerFragment) getFragmentManager().findFragmentById(R.id.fragment_timer)).score2;
+      String message = "Game finished";
+      if(score1>score2)
+         message = "You Win!! \n My Score: " + score1+ "\n Their Score: "+score2;
+      else if (score1==score2)
+         message = "Game Draw!! \n My Score: " + score1+ "\n Their Score: "+score2;
+      else
+         message = "You Lose!! \n My Score: " + score1+ "\n Their Score: "+score2;
+        /*mPauseButton.setVisibility(View.INVISIBLE);
+        mPhase2Button.setVisibility(View.INVISIBLE);*/
+      AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+      builder1.setMessage(message);
+      builder1.setCancelable(false);
+      builder1.setPositiveButton(
+              "Ok",
+              new DialogInterface.OnClickListener() {
+                 public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    finish();
+
+                 }
+              });
+      builder1.show();
+
+   }
+
+
+   public void proceedToPhase2_1()
    {
       ScroggleTimerFragment.ct.cancel();
       mTimerFragment.removeTimerText();
@@ -266,6 +296,8 @@ public class ScroggleGameActivity extends Activity {
                                            DataSnapshot dataSnapshot) {
                        // Transaction completed
                        //Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+
+                       ((ScroggleGameFragment) getFragmentManager().findFragmentById(R.id.fragment_game)).updateGameBoard();
                     }
                  });
    }

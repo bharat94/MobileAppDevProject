@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 
-
 import static edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.activities.ScroggleGameActivity.mMediaPlayer;
 
 public class ScroggleMainActivity extends AppCompatActivity {

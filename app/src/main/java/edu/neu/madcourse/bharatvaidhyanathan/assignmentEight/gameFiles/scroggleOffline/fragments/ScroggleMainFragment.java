@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.activities.ScroggleGameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.activities.OfflineScroggleGameActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.activities.ScroggleMainActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.NineLetterDict;
 
@@ -82,15 +82,15 @@ public class ScroggleMainFragment extends Fragment {
          @Override
          public void onClick(View view) {
             NineLetterDict.getInstance(getActivity()).resetWords();
-            Intent intent = new Intent(getActivity(), ScroggleGameActivity.class);
+            Intent intent = new Intent(getActivity(), OfflineScroggleGameActivity.class);
             getActivity().startActivity(intent);
          }
       });
       continueButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), ScroggleGameActivity.class);
-            intent.putExtra(ScroggleGameActivity.KEY_RESTORE, true);
+            Intent intent = new Intent(getActivity(), OfflineScroggleGameActivity.class);
+            intent.putExtra(OfflineScroggleGameActivity.KEY_RESTORE, true);
             getActivity().startActivity(intent);
          }
       });

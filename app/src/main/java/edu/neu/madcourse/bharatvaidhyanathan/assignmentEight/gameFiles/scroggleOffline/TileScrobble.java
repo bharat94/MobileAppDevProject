@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.fragments.ScroggleGameFragment;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.fragments.OfflineScroggleGameFragment;
 
 public class TileScrobble {
 
@@ -30,12 +30,12 @@ public class TileScrobble {
    private static final int LEVEL_AVAILABLE = 3;
    private static final int LEVEL_TIE = 3;
 
-   private final ScroggleGameFragment mGame;
+   private final OfflineScroggleGameFragment mGame;
    private Owner mOwner = Owner.NEITHER;
    private View mView;
    private TileScrobble mSubTiles[];
 
-   public TileScrobble(ScroggleGameFragment game) {
+   public TileScrobble(OfflineScroggleGameFragment game) {
       this.mGame = game;
    }
 
