@@ -34,7 +34,7 @@
 
       <fragment
           android:id="@+id/fragment_timer"
-          class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleTimerFragment"
+          class="edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.fragments.OfflineScroggleTimerFragment"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="0.155"
@@ -42,7 +42,7 @@
 
       <fragment
          android:id="@+id/fragment_game"
-         class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleGameFragment"
+         class="edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.fragments.OfflineScroggleGameFragment"
          android:layout_width="wrap_content"
          android:layout_height="0dp"
           android:layout_weight="0.71"
@@ -51,7 +51,7 @@
 
       <fragment
          android:id="@+id/fragment_game_controls"
-         class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleControlFragment"
+         class="edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.fragments.OfflineScroggleControlFragment"
          android:layout_width="wrap_content"
          android:layout_height="0dp"
           android:layout_weight="0.135"

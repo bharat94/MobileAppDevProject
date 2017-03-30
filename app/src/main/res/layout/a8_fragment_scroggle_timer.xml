@@ -25,7 +25,7 @@
    <TextView
        android:id="@+id/timer_tv"
        android:text="00:00"
-       android:layout_weight="0.5"
+       android:layout_weight="0.3"
        android:textStyle="bold"
        android:fontFamily="sans-serif"
        android:textColor="@android:color/black"
@@ -35,6 +35,13 @@
        android:layout_width="0dp"
        android:layout_height="wrap_content" />
 
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:layout_weight="0.7">
       <TextView
           android:id="@+id/text_view_score"
           android:text="Score : 0"
@@ -45,9 +52,21 @@
           android:textSize="16sp"
           android:gravity="center"
           android:elevation="@dimen/elevation_low"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content" />
-
+          android:layout_width="wrap_content"
+          android:layout_height="0dp" />
+         <TextView
+             android:id="@+id/text_view_score_opp"
+             android:text="Score : 0"
+             android:layout_weight="0.5"
+             android:textStyle="bold"
+             android:fontFamily="sans-serif"
+             android:textColor="@android:color/black"
+             android:textSize="16sp"
+             android:gravity="center"
+             android:elevation="@dimen/elevation_low"
+             android:layout_width="wrap_content"
+             android:layout_height="0dp" />
+      </LinearLayout>
    </LinearLayout>
 
 

@@ -3,10 +3,36 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Current Location : United States"
+            android:textSize="20sp"
+            android:id="@+id/current_location_text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:gravity="center">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Players LeaderBoard"
+        android:text="LeaderBoard"
         android:textSize="20sp"/>
 
     <ListView
@@ -14,4 +40,23 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:id="@+id/leaderboard_list"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:gravity="center">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh My Location"
+        android:id="@+id/btn_refresh_location"/>
+
+    </LinearLayout>
+
 </LinearLayout>
