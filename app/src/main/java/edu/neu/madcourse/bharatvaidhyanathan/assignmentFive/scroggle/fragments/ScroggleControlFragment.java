@@ -95,6 +95,8 @@ public class ScroggleControlFragment extends Fragment {
          }
       });
 
+
+
       return rootView;
 }
 
