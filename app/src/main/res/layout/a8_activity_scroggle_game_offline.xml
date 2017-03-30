@@ -1,0 +1,84 @@
+<!--
+ ! Excerpted from "Hello, Android",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material, 
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/eband4 for more book information.
+-->
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<FrameLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+    android:id="@+id/game_layout"
+   tools:context=".assignmentOne.tictactoe.activities.MainActivity">
+
+
+   <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/back"/>
+
+   <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:orientation="vertical">
+
+      <fragment
+          android:id="@+id/fragment_timer"
+          class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleTimerFragment"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="0.155"
+          tools:layout="@layout/fragment_scroggle_timer"/>
+
+      <fragment
+         android:id="@+id/fragment_game"
+         class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleGameFragment"
+         android:layout_width="wrap_content"
+         android:layout_height="0dp"
+          android:layout_weight="0.71"
+         tools:layout="@layout/fragment_scroggle_game"/>
+      <!-- Control fragment goes here... -->
+
+      <fragment
+         android:id="@+id/fragment_game_controls"
+         class="edu.neu.madcourse.bharatvaidhyanathan.assignmentFive.scroggle.fragments.ScroggleControlFragment"
+         android:layout_width="wrap_content"
+         android:layout_height="0dp"
+          android:layout_weight="0.135"
+         tools:layout="@layout/fragment_scroggle_control"/>
+
+   </LinearLayout>
+
+   <include layout="@layout/thinking"/>
+</FrameLayout>
+
+   <LinearLayout
+       android:id="@+id/pause_layout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:visibility="gone"
+       >
+      <Button
+          android:id="@+id/resume"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:text="Resume"
+          android:background="@android:color/holo_blue_dark"
+          android:textSize="40sp"
+
+          />
+      </LinearLayout>
+
+</LinearLayout>
