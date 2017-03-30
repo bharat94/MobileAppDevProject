@@ -1,6 +1,7 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.multiplayerScroggle;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.MultiplayerScroggleActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.NineLetterDict;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.gameFiles.scroggleOffline.activities.OfflineScroggleGameActivity;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.Game;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.User;
 
 public class OfflineGameFragment extends Fragment {
@@ -65,12 +69,39 @@ public class OfflineGameFragment extends Fragment {
                         "Successfully Sent an Offline Challenge to the player!", Toast.LENGTH_LONG)
                         .show();
 
+
+
+
+                NineLetterDict.getInstance(getActivity()).resetWords();
+                final String words = NineLetterDict.getInstance(getActivity()).getWordsAsString();
+
+                Game game = new Game();
+                game.setBoard(words);
+                game.setSelection(Constants.DefaultSelection);
+                game.setPlayer1(((MultiplayerScroggleActivity)getActivity()).userName);
+                game.setScore1("0");
+                game.setScore2("0");
+                game.setJoined(true);
+                game.setHosted(false);
+
+                game.setGameID(((MultiplayerScroggleActivity)getActivity()).mDatabase.child("games").push().getKey());
+                ((MultiplayerScroggleActivity)getActivity()).mDatabase.child("games").child(game.getGameID()).setValue(game);
+                Constants.GameID = game.getGameID();
+
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        ((MultiplayerScroggleActivity) getActivity()).pushNotification(usersList.get(position).getRegID());
+                        ((MultiplayerScroggleActivity) getActivity()).pushNotification(usersList.get(position).getRegID(), words);
                     }
                 }).start();
+
+                Intent i = new Intent(getActivity(),OfflineScroggleGameActivity.class);
+                //String words = NineLetterDict.getInstance(mContext).getWordsAsString();
+                i.putExtra(Constants.GAME_BOARD,words);
+                i.putExtra(Constants.GAME_ID,Constants.GameID);
+                i.putExtra("isHosted",true);
+                getActivity().startActivity(i);
 
             }
 

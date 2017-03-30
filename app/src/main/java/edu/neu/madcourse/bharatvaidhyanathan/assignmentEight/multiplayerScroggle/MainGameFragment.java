@@ -1,6 +1,7 @@
 package edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.multiplayerScroggle;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.neu.madcourse.bharatvaidhyanathan.R;
+import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.LocationManagerActivity;
 import edu.neu.madcourse.bharatvaidhyanathan.assignmentEight.MultiplayerScroggleActivity;
-import edu.neu.madcourse.bharatvaidhyanathan.assignmentSeven.multiplayerScroggle.CommunicationActivity;
 
 
 public class MainGameFragment extends Fragment {
@@ -46,7 +47,10 @@ public class MainGameFragment extends Fragment {
         b_leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MultiplayerScroggleActivity)getActivity()).replaceFragment(new LeaderBoardFragment(), Constants.LEADERBOARD_FRAGMENT_TAG);
+                //((MultiplayerScroggleActivity)getActivity()).replaceFragment(new LeaderBoardFragment(), Constants.LEADERBOARD_FRAGMENT_TAG);
+                Intent i = new Intent(getActivity(), LocationManagerActivity.class);
+                i.putExtra("USN", ((MultiplayerScroggleActivity) getActivity()).userName);
+                getActivity().startActivity(i);
             }
         });
 
@@ -68,7 +72,8 @@ public class MainGameFragment extends Fragment {
             }
         });
 
-        ((MultiplayerScroggleActivity) getActivity()).getLocation();
+        // Location code
+        //((MultiplayerScroggleActivity) getActivity()).getLocation();
 
         return view;
     }

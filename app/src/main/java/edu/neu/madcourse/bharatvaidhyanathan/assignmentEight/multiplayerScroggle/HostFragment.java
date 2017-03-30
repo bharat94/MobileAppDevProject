@@ -93,7 +93,7 @@ public class HostFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Game g = dataSnapshot.getValue(Game.class);
-                if (g.isJoined()) {
+                if (g.getJoined()) {
                     //Toast.makeText(getActivity(), "The other player has joined", Toast.LENGTH_LONG).show();
                     mProgressDialog.dismiss();
                     onGameJoined(mDatabase,g.getGameID(),words);

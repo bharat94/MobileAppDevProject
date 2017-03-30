@@ -116,7 +116,7 @@ public class JoinFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot key : dataSnapshot.getChildren())
                 {
-                    if(key.getValue(Game.class).isHosted()){
+                    if(key.getValue(Game.class).getHosted()){
                         mGames.add(key.getValue(Game.class));
                         mGameNames.add(key.getValue(Game.class).getPlayer1() + "'s game");
                     }

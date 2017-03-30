@@ -27,4 +27,10 @@ public class Constants {
     public static String PLAYER_EMAIL = "player_email";
     public static String PLAYER_ID;
 
+    public static final String IS_HOSTED = "isHosted";
+    public static final String GAME_BOARD = "gameBoard";
+    public static final String GAME_ID = "gameID";
+
+
+
 }
